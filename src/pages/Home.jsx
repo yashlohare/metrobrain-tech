@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import { Terminal, Code, Smartphone, Rocket, Globe } from 'lucide-react';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const [init, setInit] = useState(false);
@@ -16,69 +12,55 @@ export default function Home() {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     }).then(() => setInit(true));
-
-    // GSAP Staggered Reveals for Features
-    gsap.fromTo(".gsap-feature-card", 
-      { opacity: 0, y: 30 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.8, 
-        stagger: 0.2, 
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ".gsap-features-container",
-          start: "top 80%"
-        }
-      }
-    );
   }, []);
 
   const particlesOptions = {
     fullScreen: { enable: false },
     particles: {
       number: { value: 100, density: { enable: true, area: 800 } },
-      color: { value: ["#00d4ff", "#7c3aed", "#ec4899"] },
+      color: { value: "#00d4ff" },
       shape: { type: "circle" },
-      opacity: { value: { min: 0.2, max: 0.6 }, animation: { enable: true, speed: 1, minimumValue: 0.1 } },
-      size: { value: { min: 1, max: 4 } },
+      opacity: { 
+        value: 0, // Circles invisible as requested
+        animation: { enable: false } 
+      },
+      size: { value: 1 },
       links: {
         enable: true,
         distance: 180,
         color: "#00d4ff",
-        opacity: 0.4,
+        opacity: 0.7, // Only lines visible
         width: 1.5,
-        consent: false,
-        triangles: { enable: true, opacity: 0.1 }
+        triangles: { enable: true, opacity: 0.05 }
       },
       move: {
         enable: true,
-        speed: 1.2,
+        speed: 1,
         direction: "none",
         outModes: { default: "bounce" },
       },
     },
     interactivity: {
       events: {
-        onHover: { enable: true, mode: ["grab", "bubble"] },
+        onHover: { enable: true, mode: "grab" },
         onClick: { enable: true, mode: "push" },
       },
       modes: {
-        grab: { distance: 220, links: { opacity: 1, color: "#00d4ff" } },
-        bubble: { distance: 200, size: 8, duration: 2, opacity: 0.8 },
+        grab: { distance: 220, links: { opacity: 1 } },
         push: { quantity: 4 },
       },
     },
     detectRetina: true,
   };
+
   return (
     <div className="relative isolate overflow-hidden min-h-screen">
-      {/* Neuron Particles Background */}
+      {/* Line-Only Background Particles */}
       {init && (
         <Particles 
           id="tsparticles" 
           options={particlesOptions} 
-          className="absolute inset-0 -z-20 p-events-none" 
+          className="absolute inset-0 -z-20 pointer-events-none" 
         />
       )}
 
@@ -134,23 +116,27 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Feature Cards Setup */}
-        <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 gsap-features-container">
+        {/* Feature Cards Setup - Reverted to Original Framer Motion */}
+        <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
           {[
             { title: "Web Apps", icon: <Terminal className="text-pink-400" size={32}/>, text: "React & Next.js SPAs built for immense scale and perfect SEO." },
             { title: "E-Commerce", icon: <Code className="text-purple-400" size={32}/>, text: "High-conversion storefronts using custom headless architectures." },
             { title: "Mobile Dev", icon: <Smartphone className="text-blue-400" size={32}/>, text: "Cross-platform iOS and Android apps using React Native." },
           ].map((feature, i) => (
-            <div
+            <motion.div
               key={feature.title}
-              className="glass-panel p-8 rounded-2xl hover:border-pink-500/50 transition-colors group cursor-default gsap-feature-card"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.2 }}
+              className="glass-panel p-8 rounded-2xl hover:border-pink-500/50 transition-colors group cursor-default"
             >
               <div className="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
               <p className="text-slate-400 leading-relaxed">{feature.text}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
