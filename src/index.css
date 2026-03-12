@@ -739,8 +739,7 @@ input, textarea {
 }
 
 .partner-badge {
-  position: absolute;
-  top: -12px;
+  display: inline-block;
   background: var(--gradient-primary);
   color: white;
   font-size: 0.65rem;
@@ -750,6 +749,7 @@ input, textarea {
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 0 4px 10px rgba(0, 212, 255, 0.4);
+  margin-bottom: 8px;
 }
 
 /* ========== SERVICES BENTO ========== */
