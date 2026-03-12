@@ -6,10 +6,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const partners = [
   { name: 'Metrobrain Educare Pvt.Ltd', url: 'https://metrobrain.in/', isCustomer: true },
-  { name: 'FutureWorks AI', url: '#', isCustomer: false },
-  { name: 'CyberSphere', url: '#', isCustomer: false },
-  { name: 'Nova Data Systems', url: '#', isCustomer: true },
-  { name: 'Quantum Core', url: '#', isCustomer: false },
 ];
 
 const Partners = () => {

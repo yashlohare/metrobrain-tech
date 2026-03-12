@@ -5,7 +5,7 @@ import { ADMIN_SESSION_KEY } from './AdminLogin';
 
 const Dashboard = ({ session, onLogout }) => {
   const [activeTab, setActiveTab] = useState('leads');
-  const [stats, setStats] = useState({ leads: 0, chats: 0, projects: 6, testimonials: 5 });
+  const [stats, setStats] = useState({ leads: 0, chats: 0, projects: 3, testimonials: 0 });
   const [leads, setLeads] = useState([]);
   const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(true);
