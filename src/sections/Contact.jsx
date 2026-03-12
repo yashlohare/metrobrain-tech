@@ -66,32 +66,13 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Save to Supabase (or mock if not configured)
     const result = await submitContact(formData);
     
     if (result.success) {
-      // Construct WhatsApp message
-      const msg = `*New Request*\n\n` +
-        `*Name:* ${formData.name}\n` +
-        `*Email:* ${formData.email}\n` +
-        `*Phone:* ${formData.phone}\n` +
-        `*Service:* ${formData.service}\n\n` +
-        `*Message:*\n${formData.message}`;
-
-      const AGENCY_PHONE = "918940055025"; 
-      
       setSubmitted(true);
       setFormData({ name: '', email: '', phone: '', service: '', message: '' });
       setIsSubmitting(false);
-      
-      // Open WhatsApp to the lead (or agency as backup)
-      // The user wants the agency (8940055025) to be notified OR the lead to get a message.
-      // Usually, it's a notification to the AGENCY or a direct chat for the LEAD.
-      // I'll stick to the agency notification as it's the primary lead gen flow, 
-      // but ensuring the number is correct.
-      window.open(`https://wa.me/${AGENCY_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
-      
-      setTimeout(() => setSubmitted(false), 3000);
+      setTimeout(() => setSubmitted(false), 5000);
     } else {
       alert('There was a problem sending your message. Please try again or email us directly.');
       setIsSubmitting(false);

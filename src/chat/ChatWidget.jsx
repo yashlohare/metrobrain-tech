@@ -1,9 +1,129 @@
 import { useState, useEffect, useRef } from 'react';
-import { FiMessageSquare, FiX, FiSend, FiMic, FiVolume2, FiVolumeX, FiPhone } from 'react-icons/fi';
+import { FiMessageSquare, FiX, FiSend, FiMic, FiVolume2, FiVolumeX, FiPhone, FiCheckCircle } from 'react-icons/fi';
 import { sendMessage } from './aiService';
-import { saveChatMessage } from '../lib/supabase';
+import { saveChatMessage, submitContact } from '../lib/supabase';
 
+// Detects if the user is saying yes to a callback/call request
+const isYesToCall = (text) => {
+  const lower = text.toLowerCase().trim();
+  return (
+    lower === 'yes' || lower === 'yes please' || lower === 'sure' ||
+    lower === 'ok' || lower === 'okay' || lower === 'yeah' ||
+    lower === 'yep' || lower === 'haan' || lower === 'ha' ||
+    lower.includes('yes call') || lower.includes('please call') ||
+    lower.includes('call me') || lower.includes('callback') ||
+    lower.includes('have someone call') || lower.includes('get a call')
+  );
+};
 
+// Detects if the previous bot message was asking about a callback
+const botAskedForCallback = (messages) => {
+  for (let i = messages.length - 1; i >= 0; i--) {
+    if (messages[i].role === 'bot') {
+      const t = messages[i].text?.toLowerCase() || '';
+      if (
+        t.includes('should i have a representative call you') ||
+        t.includes('would you like us to call you') ||
+        t.includes('shall we call you') ||
+        t.includes('want a callback') ||
+        t.includes('have a representative call')
+      ) {
+        return true;
+      }
+      break;
+    }
+  }
+  return false;
+};
+
+// Inline lead form rendered as a chat message
+const LeadForm = ({ onSubmit, onSkip }) => {
+  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' });
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+
+  const handleChange = (e) => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!form.name || !form.phone) return;
+    setLoading(true);
+    await onSubmit(form);
+    setDone(true);
+    setLoading(false);
+  };
+
+  if (done) {
+    return (
+      <div className="chat-lead-success">
+        <FiCheckCircle style={{ color: '#10b981', fontSize: '1.5rem' }} />
+        <p>Thanks <strong>{form.name}</strong>! 🎉 Our team will call you at <strong>{form.phone}</strong> shortly.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form className="chat-lead-form" onSubmit={handleSubmit}>
+      <p className="chat-lead-title">📋 Quick Details</p>
+      <input
+        className="chat-lead-input"
+        name="name"
+        placeholder="Your Name *"
+        value={form.name}
+        onChange={handleChange}
+        required
+      />
+      <input
+        className="chat-lead-input"
+        name="phone"
+        placeholder="Phone Number *"
+        value={form.phone}
+        onChange={handleChange}
+        required
+        type="tel"
+      />
+      <input
+        className="chat-lead-input"
+        name="email"
+        placeholder="Email (optional)"
+        value={form.email}
+        onChange={handleChange}
+        type="email"
+      />
+      <select
+        className="chat-lead-input"
+        name="service"
+        value={form.service}
+        onChange={handleChange}
+      >
+        <option value="">Service Interested In</option>
+        <option value="web">Web Application</option>
+        <option value="mobile">Mobile App</option>
+        <option value="chatbot">AI Chatbot</option>
+        <option value="marketing">Social Media Marketing</option>
+        <option value="seo">SEO</option>
+        <option value="design">UI/UX Design</option>
+        <option value="other">Other</option>
+      </select>
+      <textarea
+        className="chat-lead-input"
+        name="message"
+        placeholder="Brief requirement (optional)"
+        value={form.message}
+        onChange={handleChange}
+        rows={2}
+      />
+      <div className="chat-lead-actions">
+        <button type="submit" className="chat-lead-submit" disabled={loading}>
+          {loading ? 'Submitting...' : 'Request Callback'}
+        </button>
+        <button type="button" className="chat-lead-skip" onClick={onSkip}>
+          Skip
+        </button>
+      </div>
+    </form>
+  );
+};
 
 const ChatWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,35 +136,61 @@ const ChatWidget = () => {
   const [isListening, setIsListening] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [showLeadForm, setShowLeadForm] = useState(false);
   const messagesEndRef = useRef(null);
   const recognitionRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isTyping]);
+  }, [messages, isTyping, showLeadForm]);
+
+  const handleLeadSubmit = async (formData) => {
+    await submitContact({
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      service: formData.service || 'callback-request',
+      message: formData.message || 'Callback requested via AI chat',
+    });
+    saveChatMessage(sessionId, 'user', `[LEAD FORM] ${formData.name} | ${formData.phone}`, 'en-IN');
+    setShowLeadForm(false);
+    setMessages(prev => [...prev, {
+      role: 'bot',
+      text: `Perfect! ✅ We've received your details, ${formData.name}. Our team will call you at ${formData.phone} soon. Is there anything else I can help you with?`
+    }]);
+  };
+
+  const handleLeadSkip = () => {
+    setShowLeadForm(false);
+    setMessages(prev => [...prev, {
+      role: 'bot',
+      text: "No worries! You can reach us anytime at +91 70471 23555 or email metrobraintechnologies@gmail.com. Anything else I can help with?"
+    }]);
+  };
 
   const handleSend = async () => {
     if (!input.trim()) return;
     const userMsg = input.trim();
     setInput('');
-    setMessages((prev) => [...prev, { role: 'user', text: userMsg }]);
-    setIsTyping(true);
-    
-    // Save user message to database
+
+    const updatedMessages = [...messages, { role: 'user', text: userMsg }];
+    setMessages(updatedMessages);
     saveChatMessage(sessionId, 'user', userMsg, 'en-IN');
 
+    // Check if user said yes to a callback offer
+    if (isYesToCall(userMsg) && botAskedForCallback(messages)) {
+      setShowLeadForm(true);
+      return;
+    }
+
+    setIsTyping(true);
     try {
       const response = await sendMessage(userMsg);
-      setMessages((prev) => [...prev, { role: 'bot', text: response }]);
-      
-      // Save bot response to database
+      setMessages(prev => [...prev, { role: 'bot', text: response }]);
       saveChatMessage(sessionId, 'bot', response, 'en-IN');
-      
-      if (voiceEnabled) {
-        speak(response);
-      }
+      if (voiceEnabled) speak(response);
     } catch (err) {
-      setMessages((prev) => [...prev, { role: 'bot', text: "Sorry, I'm having trouble. Please try again!" }]);
+      setMessages(prev => [...prev, { role: 'bot', text: "Sorry, I'm having trouble. Please try again!" }]);
     } finally {
       setIsTyping(false);
     }
@@ -78,15 +224,19 @@ const ChatWidget = () => {
       setInput(transcript);
       setTimeout(() => {
         setInput('');
-        setMessages((prev) => [...prev, { role: 'user', text: transcript }]);
+        const curr = [...messages, { role: 'user', text: transcript }];
+        setMessages(curr);
+        if (isYesToCall(transcript) && botAskedForCallback(messages)) {
+          setShowLeadForm(true);
+          return;
+        }
         setIsTyping(true);
-        
         sendMessage(transcript).then((response) => {
-          setMessages((prev) => [...prev, { role: 'bot', text: response }]);
+          setMessages(prev => [...prev, { role: 'bot', text: response }]);
           setIsTyping(false);
           if (voiceEnabled) speak(response);
         }).catch(() => {
-          setMessages((prev) => [...prev, { role: 'bot', text: "Sorry, I'm having trouble. Please try again!" }]);
+          setMessages(prev => [...prev, { role: 'bot', text: "Sorry, I'm having trouble. Please try again!" }]);
           setIsTyping(false);
         });
       }, 300);
@@ -98,25 +248,17 @@ const ChatWidget = () => {
 
   const speak = (text) => {
     if (!('speechSynthesis' in window) || !voiceEnabled) return;
-    
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-IN';
-    
     utterance.rate = 0.9;
     utterance.pitch = 1;
-    
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
-    utterance.onerror = (e) => {
-      console.error('Speech synthesis error', e);
-      setIsSpeaking(false);
-    };
-    
+    utterance.onerror = () => setIsSpeaking(false);
     window.speechSynthesis.speak(utterance);
   };
 
-  // Listen to voice toggle to immediately cancel if muted
   useEffect(() => {
     if (!voiceEnabled && 'speechSynthesis' in window) {
       window.speechSynthesis.cancel();
@@ -126,10 +268,10 @@ const ChatWidget = () => {
 
   return (
     <>
-      {/* Floating Chat Toggle Button with Avatar */}
+      {/* Floating Chat Toggle Button */}
       {!isOpen && (
-        <button 
-          className="chat-toggle-btn" 
+        <button
+          className="chat-toggle-btn"
           onClick={() => setIsOpen(true)}
           aria-label="Open chat"
           id="chat-toggle"
@@ -142,7 +284,7 @@ const ChatWidget = () => {
       {/* Chat Window */}
       {isOpen && (
         <div className="chat-window">
-          {/* Header with Avatar */}
+          {/* Header */}
           <div className="chat-header">
             <div className={`chat-avatar-container ${isSpeaking ? 'speaking' : ''}`}>
               <img src="/ai-avatar.png" alt="Arjun AI" className="chat-avatar-img" />
@@ -153,8 +295,8 @@ const ChatWidget = () => {
               <h4>Arjun — AI Assistant</h4>
               <span>{isSpeaking ? '🔊 Speaking...' : isTyping ? '💭 Thinking...' : 'Online'}</span>
             </div>
-            <button 
-              className="chat-voice-btn" 
+            <button
+              className="chat-voice-btn"
               onClick={() => setVoiceEnabled(!voiceEnabled)}
               title={voiceEnabled ? 'Mute voice' : 'Enable voice'}
               style={{ marginLeft: 'auto', marginRight: '4px' }}
@@ -174,8 +316,6 @@ const ChatWidget = () => {
             </button>
           </div>
 
-
-
           {/* Messages */}
           <div className="chat-messages">
             {messages.map((msg, index) => (
@@ -192,6 +332,12 @@ const ChatWidget = () => {
                 <div className="chat-typing">
                   <span /><span /><span />
                 </div>
+              </div>
+            )}
+            {showLeadForm && (
+              <div className="chat-message bot" style={{ alignItems: 'flex-start' }}>
+                <img src="/ai-avatar.png" alt="" className="msg-avatar" />
+                <LeadForm onSubmit={handleLeadSubmit} onSkip={handleLeadSkip} />
               </div>
             )}
             <div ref={messagesEndRef} />

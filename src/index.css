@@ -1596,6 +1596,106 @@ input, textarea {
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
 }
 
+/* ---- Chat inline lead form ---- */
+.chat-lead-form {
+  background: rgba(10, 15, 30, 0.85);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 260px;
+  width: 100%;
+}
+
+.chat-lead-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  margin-bottom: 2px;
+}
+
+.chat-lead-input {
+  width: 100%;
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.chat-lead-input:focus {
+  border-color: var(--accent-blue);
+  background: rgba(0, 212, 255, 0.04);
+}
+
+.chat-lead-input option {
+  background: #0a0f1e;
+  color: #fff;
+}
+
+.chat-lead-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  align-items: center;
+}
+
+.chat-lead-submit {
+  flex: 1;
+  padding: 8px 12px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  font-family: inherit;
+}
+
+.chat-lead-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chat-lead-skip {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+
+.chat-lead-skip:hover {
+  color: var(--text-primary);
+}
+
+.chat-lead-success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 260px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
 .chat-lang-selector {
   padding: 4px 8px;
   display: flex;
