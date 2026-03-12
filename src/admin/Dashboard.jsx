@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { FiUsers, FiMessageSquare, FiFolder, FiStar, FiLogOut, FiRefreshCw, FiMenu, FiX } from 'react-icons/fi';
 import { ADMIN_SESSION_KEY } from './AdminLogin';
@@ -64,7 +64,7 @@ const Dashboard = ({ session, onLogout }) => {
   };
 
   // Fetch on mount
-  useState(() => { fetchData(); }, []);
+  useEffect(() => { fetchData(); }, []);
 
   const navItems = [
     { id: 'leads', icon: <FiUsers />, label: `Leads (${stats.leads})` },
