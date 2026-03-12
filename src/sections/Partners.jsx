@@ -45,23 +45,38 @@ const Partners = () => {
         </div>
         
         <div className="partners-marquee-container">
-          <div className="partners-marquee">
-            {/* Double the array for seamless scrolling */}
-            {[...partners, ...partners].map((partner, index) => (
-              <a 
-                key={index}
-                href={partner.url}
+          {partners.length === 1 ? (
+            /* Single partner — show centered, no scroll */
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}>
+              <a
+                href={partners[0].url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`partner-logo-item ${partner.name === 'Metrobrain Educare Pvt.Ltd' ? 'highlighted-partner' : ''}`}
+                className="partner-logo-item highlighted-partner"
               >
-                {partner.name === 'Metrobrain Educare Pvt.Ltd' && (
-                  <span className="partner-badge">Premium Partner & Customer</span>
-                )}
-                <h3 className="partner-name">{partner.name}</h3>
+                <span className="partner-badge">Premium Partner &amp; Customer</span>
+                <h3 className="partner-name">{partners[0].name}</h3>
               </a>
-            ))}
-          </div>
+            </div>
+          ) : (
+            /* Multiple partners — scrolling marquee */
+            <div className="partners-marquee">
+              {[...partners, ...partners].map((partner, index) => (
+                <a
+                  key={index}
+                  href={partner.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`partner-logo-item ${partner.name === 'Metrobrain Educare Pvt.Ltd' ? 'highlighted-partner' : ''}`}
+                >
+                  {partner.name === 'Metrobrain Educare Pvt.Ltd' && (
+                    <span className="partner-badge">Premium Partner &amp; Customer</span>
+                  )}
+                  <h3 className="partner-name">{partner.name}</h3>
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
