@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { supabase } from '../lib/supabase';
-import { FiLock, FiMail, FiArrowRight } from 'react-icons/fi';
+import { FiLock, FiUser, FiArrowRight } from 'react-icons/fi';
+
+const ADMIN_SESSION_KEY = 'metrotech_admin_session';
 
 const AdminLogin = ({ onLogin }) => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -13,28 +16,34 @@ const AdminLogin = ({ onLogin }) => {
     setLoading(true);
     setError(null);
 
-    // Map "userid-metrotech" to a valid email-like if Supabase is being used
-    // For now, we will treat it as a string check for the demo/fallback
     const targetUserId = 'metrotech';
     const targetPassword = 'Metro@2026';
 
     try {
-      // Manual check for the provided metrotech credentials
       if (userId === targetUserId && password === targetPassword) {
-        console.log("Admin logged in via manual fallback.");
-        onLogin({ user: { email: userId, id: 'admin-manual' } });
+        const sessionData = { user: { email: userId, id: 'admin-manual' } };
+        if (rememberMe) {
+          localStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(sessionData));
+        } else {
+          sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(sessionData));
+        }
+        onLogin(sessionData);
         return;
       }
 
       if (supabase) {
-        // Attempt real Supabase login if user wants to use database auth
         const { data, error } = await supabase.auth.signInWithPassword({
           email: userId.includes('@') ? userId : `${userId}@metrobrain.in`,
           password,
         });
 
         if (error) throw error;
-        if (data.session) onLogin(data.session);
+        if (data.session) {
+          if (rememberMe) {
+            localStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(data.session));
+          }
+          onLogin(data.session);
+        }
       } else {
         setError('Invalid credentials. Please use your provided UserID and Password.');
       }
@@ -59,13 +68,13 @@ const AdminLogin = ({ onLogin }) => {
           <div className="form-group">
             <label>UserID</label>
             <div className="input-with-icon">
-              <FiMail className="input-icon" />
+              <FiUser className="input-icon" />
               <input
                 type="text"
                 value={userId}
                 onChange={(e) => setUserId(e.target.value)}
                 required
-                placeholder="userid-metrotech"
+                placeholder="metrotech"
               />
             </div>
           </div>
@@ -84,14 +93,23 @@ const AdminLogin = ({ onLogin }) => {
             </div>
           </div>
 
-          <button type="submit" className="btn btn-primary login-btn" disabled={loading}>
+          <label className="remember-me">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
+            Remember me for 30 days
+          </label>
+
+          <button type="submit" className="btn login-btn" disabled={loading}>
             {loading ? 'Authenticating...' : <><FiArrowRight /> Login</>}
           </button>
         </form>
       </div>
     </div>
   );
-
 };
 
+export { ADMIN_SESSION_KEY };
 export default AdminLogin;

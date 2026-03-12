@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import AdminLogin from './AdminLogin';
+import AdminLogin, { ADMIN_SESSION_KEY } from './AdminLogin';
 import Dashboard from './Dashboard';
 import { supabase } from '../lib/supabase';
 import './admin.css';
@@ -9,23 +9,33 @@ const AdminPanel = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check current session
+    // 1. Check localStorage first (Remember Me), then sessionStorage
+    const stored = localStorage.getItem(ADMIN_SESSION_KEY) || sessionStorage.getItem(ADMIN_SESSION_KEY);
+    if (stored) {
+      try {
+        setSession(JSON.parse(stored));
+        setLoading(false);
+        return;
+      } catch {
+        localStorage.removeItem(ADMIN_SESSION_KEY);
+        sessionStorage.removeItem(ADMIN_SESSION_KEY);
+      }
+    }
+
+    // 2. Fall back to Supabase session check
     if (supabase) {
       supabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session);
         setLoading(false);
       });
 
-      // Listen for auth changes
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange((_event, session) => {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
         setSession(session);
       });
 
       return () => subscription.unsubscribe();
     } else {
-      setLoading(false); // No supabase configured
+      setLoading(false);
     }
   }, []);
 
