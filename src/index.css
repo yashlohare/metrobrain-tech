@@ -2160,6 +2160,13 @@ input, textarea {
   color: white;
   box-shadow: var(--glow-blue);
   position: relative;
+  overflow: hidden;
+}
+
+.founder-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .avatar-square::after {

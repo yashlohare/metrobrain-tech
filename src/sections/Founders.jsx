@@ -46,7 +46,7 @@ const Founders = () => {
       role: 'Founder & CEO',
       contact: '7047123555',
       email: 'metrobraintechnologies@gmail.com',
-      initials: 'YL',
+      image: '/yash.jpg',
       bio: 'Visionary technologist specialized in AI systems and enterprise architecture.',
       linkedin: 'https://www.linkedin.com/in/yash-lohare-669033206?',
       instagram: 'https://www.instagram.com/yashlohare17?'
@@ -56,9 +56,10 @@ const Founders = () => {
       role: 'Co-Founder & CTO',
       contact: '8805775486',
       email: 'metrobraintechnologies@gmail.com',
-      initials: 'AM',
+      image: '/adinath.jpg',
       bio: 'Expert in full-stack development and scaling digital infrastructure for the modern web.',
-      linkedin: 'https://www.linkedin.com/in/adinath-made-763a4537b?'
+      linkedin: 'https://www.linkedin.com/in/adinath-made-763a4537b?',
+      instagram: 'https://www.instagram.com/adinath_made?'
     }
   ];
 
@@ -82,7 +83,7 @@ const Founders = () => {
             >
               <div className="founder-avatar">
                 <div className="avatar-square">
-                  {founder.initials}
+                  <img src={founder.image} alt={founder.name} className="founder-img" />
                 </div>
               </div>
               <div className="founder-info">
