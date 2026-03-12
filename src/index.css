@@ -1576,6 +1576,26 @@ input, textarea {
   box-shadow: var(--glow-blue);
 }
 
+.chat-call-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.12);
+  color: #25D366;
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.chat-call-btn:hover {
+  background: #25D366;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
+}
+
 .chat-lang-selector {
   padding: 4px 8px;
   display: flex;

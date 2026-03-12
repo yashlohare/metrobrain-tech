@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { FiMessageSquare, FiX, FiSend, FiMic, FiVolume2, FiVolumeX } from 'react-icons/fi';
+import { FiMessageSquare, FiX, FiSend, FiMic, FiVolume2, FiVolumeX, FiPhone } from 'react-icons/fi';
 import { sendMessage } from './aiService';
 import { saveChatMessage } from '../lib/supabase';
 
@@ -157,10 +157,18 @@ const ChatWidget = () => {
               className="chat-voice-btn" 
               onClick={() => setVoiceEnabled(!voiceEnabled)}
               title={voiceEnabled ? 'Mute voice' : 'Enable voice'}
-              style={{ marginLeft: 'auto', marginRight: '8px' }}
+              style={{ marginLeft: 'auto', marginRight: '4px' }}
             >
               {voiceEnabled ? <FiVolume2 /> : <FiVolumeX />}
             </button>
+            <a
+              href="tel:8805775486"
+              className="chat-voice-btn chat-call-btn"
+              title="Call Us: 8805775486"
+              style={{ marginRight: '4px', textDecoration: 'none' }}
+            >
+              <FiPhone />
+            </a>
             <button className="chat-close-btn" onClick={() => setIsOpen(false)}>
               <FiX />
             </button>
