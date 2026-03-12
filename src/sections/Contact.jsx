@@ -84,8 +84,12 @@ const Contact = () => {
       setFormData({ name: '', email: '', phone: '', service: '', message: '' });
       setIsSubmitting(false);
       
-      // Open WhatsApp
-      window.open(`https://api.whatsapp.com/send?phone=${AGENCY_PHONE}&text=${encodeURIComponent(msg)}`, '_blank');
+      // Open WhatsApp to the lead (or agency as backup)
+      // The user wants the agency (8940055025) to be notified OR the lead to get a message.
+      // Usually, it's a notification to the AGENCY or a direct chat for the LEAD.
+      // I'll stick to the agency notification as it's the primary lead gen flow, 
+      // but ensuring the number is correct.
+      window.open(`https://wa.me/${AGENCY_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
       
       setTimeout(() => setSubmitted(false), 3000);
     } else {
