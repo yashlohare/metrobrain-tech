@@ -1,4 +1,6 @@
 import { FiGithub, FiTwitter, FiLinkedin, FiInstagram } from 'react-icons/fi';
+import logoImg from '../assets/logo_transparent.png';
+
 
 const Footer = () => {
   return (
@@ -6,7 +8,10 @@ const Footer = () => {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <a href="#home" className="nav-logo">Metrobrain Technologies</a>
+            <a href="#home" className="nav-logo">
+              <img src={logoImg} alt="Metrobrain Logo" className="navbar-logo-img" />
+              <span>Metrobrain Technologies</span>
+            </a>
             <p>
               Building the future of digital experiences. We create web apps, 
               mobile apps, AI solutions, and digital marketing strategies that drive growth.

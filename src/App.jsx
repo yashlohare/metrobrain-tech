@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LogoTransition from './components/LogoTransition';
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Hero from './sections/Hero';
@@ -28,7 +30,7 @@ function App() {
         <Route 
           path="/" 
           element={
-            <>
+            <LogoTransition>
               <Navbar />
               <main>
                 <Hero />
@@ -36,15 +38,15 @@ function App() {
                 <Services />
                 <Portfolio />
                 <About />
+                <Pricing />
                 <AIAgent />
                 <Testimonials />
-                <Pricing />
                 <Founders />
                 <Contact />
               </main>
               <Footer />
               <ChatWidget />
-            </>
+            </LogoTransition>
           } 
         />
         <Route path="/admin/*" element={<AdminPanel />} />

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
+import logoImg from '../assets/logo_transparent.png';
+
 
 const navItems = [
   { label: 'Home', href: '#home' },
@@ -31,7 +33,10 @@ const Navbar = () => {
     <>
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="container">
-          <a href="#home" className="nav-logo">Metrobrain Technologies</a>
+          <a href="#home" className="nav-logo">
+            <img src={logoImg} alt="Metrobrain Logo" className="navbar-logo-img" />
+            <span>Metrobrain Technologies</span>
+          </a>
           
           <div className="nav-links">
             {navItems.map((item) => (

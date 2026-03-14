@@ -239,6 +239,9 @@ input, textarea {
 }
 
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-heading);
   font-size: 1.6rem;
   font-weight: 800;
@@ -246,6 +249,13 @@ input, textarea {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.navbar-logo-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4));
 }
 
 .nav-links {
@@ -1861,13 +1871,20 @@ input, textarea {
     height: 70vh;
   }
 
+  .testimonials-track {
+    flex-direction: column;
+    gap: 20px;
+    overflow-x: visible;
+  }
+
   .testimonial-card {
-    min-width: calc(100vw - 48px);
+    min-width: 100%;
     padding: 24px;
+    scroll-snap-align: none;
   }
 
   .testimonial-card blockquote {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     word-break: break-word;
   }
 
