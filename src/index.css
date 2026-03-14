@@ -1839,13 +1839,30 @@ input, textarea {
     grid-row: auto !important;
   }
 
-  .hero-stats {
-    gap: 24px;
-    flex-wrap: wrap;
+  .navbar-logo-img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
+    gap: 8px;
+  }
+
+  .hero {
+    padding-top: 100px;
+    min-height: auto;
+    display: block;
   }
 
   .hero-title {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(2rem, 8vw, 2.8rem);
+  }
+
+  .hero-stats {
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 40px;
   }
 
   .form-row {
