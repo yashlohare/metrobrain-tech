@@ -92,12 +92,12 @@ const Founders = () => {
                 <div className="founder-bio">{founder.bio}</div>
                 
                 <div className="founder-contact">
-                  <div className="contact-item">
+                  <a href={`tel:${founder.contact}`} className="contact-item">
                     <FiPhone /> <span>{founder.contact}</span>
-                  </div>
-                  <div className="contact-item">
+                  </a>
+                  <a href={`mailto:${founder.email}`} className="contact-item">
                     <FiMail /> <span>{founder.email}</span>
-                  </div>
+                  </a>
                 </div>
 
                 <div className="founder-social">

@@ -35,23 +35,19 @@ const LogoTransition = ({ children }) => {
           >
             <motion.div
               className="center-logo-container"
-              initial={{ scale: 0.3, opacity: 0, filter: 'blur(10px)' }}
+              initial={{ scale: 0.3, opacity: 0 }}
               animate={stage === 'loading' 
-                ? { scale: 1, opacity: 1, filter: 'blur(0px)' } 
+                ? { scale: 1, opacity: 1 } 
                 : { 
                     scale: 0.08, 
                     x: '-44vw', 
                     y: '-46vh',
-                    opacity: 0.8,
-                    filter: 'blur(0px)'
+                    opacity: 0.8
                   }
               }
               transition={{ 
-                duration: stage === 'loading' ? 1 : 0.9, 
-                ease: "circOut",
-                type: "spring",
-                stiffness: 80,
-                damping: 18
+                duration: stage === 'loading' ? 0.8 : 0.7, 
+                ease: "easeInOut"
               }}
             >
               <img src={logoImg} alt="Metrobrain Logo" className="transition-logo" />

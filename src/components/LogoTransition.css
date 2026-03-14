@@ -18,12 +18,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  will-change: transform, opacity;
 }
 
 .transition-logo {
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.4));
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.3));
+  will-change: transform, opacity;
 }
 
 @media (max-width: 768px) {
