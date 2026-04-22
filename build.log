@@ -1,0 +1,83 @@
+
+> metrobrain-tech-web@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\Yash\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\Yash\Desktop\New metrobrain-tech\package-lock.json
+
+▲ Next.js 16.2.2 (Turbopack)
+
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 2 errors:
+./Desktop/New metrobrain-tech/node_modules/@react-three/drei/core/Environment.js:5:1
+Module not found: Can't resolve 'three-stdlib'
+  [90m3 |[0m [36mimport[0m { useThree, useFrame, createPortal, applyProps, extend } [36mfrom[0m [32m'@react-three/fiber'[0m;
+  [90m4 |[0m [36mimport[0m { [33mScene[0m, [33mWebGLCubeRenderTarget[0m, [33mHalfFloatType[0m } [36mfrom[0m [32m'three'[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mGroundProjectedEnv[0m } [36mfrom[0m [32m'three-stdlib'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m [36mimport[0m { useEnvironment } [36mfrom[0m [32m'./useEnvironment.js'[0m;
+  [90m7 |[0m
+  [90m8 |[0m [36mconst[0m isRef = obj => obj.current && obj.current.isScene;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/New metrobrain-tech/node_modules/@react-three/drei/core/Environment.js [Client Component Browser]
+    ./Desktop/New metrobrain-tech/src/components/IntelligenceSphere.tsx [Client Component Browser]
+    ./Desktop/New metrobrain-tech/src/components/HeroSection.tsx [Client Component Browser]
+    ./Desktop/New metrobrain-tech/src/components/HeroSection.tsx [Server Component]
+    ./Desktop/New metrobrain-tech/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/New metrobrain-tech/node_modules/@react-three/drei/core/Environment.js [Client Component SSR]
+    ./Desktop/New metrobrain-tech/src/components/IntelligenceSphere.tsx [Client Component SSR]
+    ./Desktop/New metrobrain-tech/src/components/HeroSection.tsx [Client Component SSR]
+    ./Desktop/New metrobrain-tech/src/components/HeroSection.tsx [Server Component]
+    ./Desktop/New metrobrain-tech/src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+./Desktop/New metrobrain-tech/node_modules/@react-three/drei/core/useEnvironment.js:3:1
+Module not found: Can't resolve 'three-stdlib'
+  [90m1 |[0m [36mimport[0m { useThree, useLoader } [36mfrom[0m [32m'@react-three/fiber'[0m;
+  [90m2 |[0m [36mimport[0m { [33mCubeReflectionMapping[0m, [33mEquirectangularReflectionMapping[0m, [33mCubeTextureLoader[0m } [36mfrom[0m [32m...[0m
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mRGBELoader[0m, [33mEXRLoader[0m } [36mfrom[0m [32m'three-stdlib'[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m { [33mHDRJPGLoader[0m, [33mGainMapLoader[0m } [36mfrom[0m [32m'@monogrid/gainmap-js'[0m;
+  [90m5 |[0m [36mimport[0m { presetsObj } [36mfrom[0m [32m'../helpers/environment-assets.js'[0m;
+  [90m6 |[0m [36mimport[0m { useLayoutEffect } [36mfrom[0m [32m'react'[0m;
+
+
+
+Import traces:
+  Client Component Browser:
+    ./Desktop/New metrobrain-tech/node_modules/@react-three/drei/core/useEnvironment.js [Client Component Browser]
+    ./Desktop/New metrobrain-tech/node_modules/@react-three/drei/core/Environment.js [Client Component Browser]
+    ./Desktop/New metrobrain-tech/src/components/IntelligenceSphere.tsx [Client Component Browser]
+    ./Desktop/New metrobrain-tech/src/components/HeroSection.tsx [Client Component Browser]
+    ./Desktop/New metrobrain-tech/src/components/HeroSection.tsx [Server Component]
+    ./Desktop/New metrobrain-tech/src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./Desktop/New metrobrain-tech/node_modules/@react-three/drei/core/useEnvironment.js [Client Component SSR]
+    ./Desktop/New metrobrain-tech/node_modules/@react-three/drei/core/Environment.js [Client Component SSR]
+    ./Desktop/New metrobrain-tech/src/components/IntelligenceSphere.tsx [Client Component SSR]
+    ./Desktop/New metrobrain-tech/src/components/HeroSection.tsx [Client Component SSR]
+    ./Desktop/New metrobrain-tech/src/components/HeroSection.tsx [Server Component]
+    ./Desktop/New metrobrain-tech/src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at ./Desktop/New metrobrain-tech/node_modules/ (react-three/drei/core/Environment.js:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at ./Desktop/New metrobrain-tech/node_modules/ (react-three/drei/core/useEnvironment.js:3:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

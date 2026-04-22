@@ -1,0 +1,16 @@
+{
+  "name": "Metrobrain Technologies | Webier Studio",
+  "short_name": "Metrobrain",
+  "description": "Boutique software foundry creating ultra-modern web/mobile ecosystems and AI intelligence solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0055FF",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}
