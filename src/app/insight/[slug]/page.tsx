@@ -6,6 +6,22 @@ import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import AnimatedLayout from "@/components/AnimatedLayout";
 
 const articleData = {
+  "agentic-ai-enterprise": {
+    title: "Agentic AI: The Next Frontier in Enterprise Workflows",
+    category: "AI & Automation",
+    date: "Oct 18, 2026",
+    readTime: "10 min read",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop",
+    content: "The evolution from generative AI to agentic AI represents a paradigm shift in how businesses operate. Unlike standard conversational models, agentic AI acts autonomously to execute multi-step workflows, interact with enterprise APIs, and make decisions within set parameters. This deep dive covers the technical requirements for deploying autonomous agents securely, focusing on LangChain orchestration, state management, and the implementation of guardrails to prevent hallucination-driven errors in production systems."
+  },
+  "cloud-native-scalability": {
+    title: "Mastering Cloud-Native Scalability with Next.js 15",
+    category: "Cloud Engineering",
+    date: "Oct 15, 2026",
+    readTime: "7 min read",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
+    content: "Scaling modern web applications requires a shift from monolithic servers to decoupled, serverless environments. With Next.js 15, the lines between frontend and backend continue to blur, offering unprecedented edge-computing capabilities. We analyze how integrating Vercel's Edge Network with Supabase vector databases allows enterprises to build highly resilient, auto-scaling architectures capable of handling millions of concurrent connections without the latency traditionally associated with global routing."
+  },
   "scaling-nextjs": {
     title: "Scaling Next.js Applications for Enterprise Traffic",
     category: "Architecture",
