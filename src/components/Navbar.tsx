@@ -90,14 +90,14 @@ export default function Navbar() {
       <nav
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-          isScrolled ? "pt-4" : "pt-8"
+          isScrolled ? "pt-2 md:pt-4" : "pt-4 md:pt-8"
         }`}
       >
         <div className="container mx-auto px-6">
           <div 
-            className={`flex items-center justify-between px-8 py-3 rounded-full transition-all duration-700 ${
+            className={`flex items-center justify-between px-4 md:px-8 py-2 md:py-3 rounded-full transition-all duration-700 ${
               isScrolled 
-                ? "bg-black/40 border border-white/10 backdrop-blur-xl shadow-2xl shadow-cyan-500/5" 
+                ? "bg-black/40 border border-white/10 backdrop-blur-xl shadow-2xl shadow-cyan-500/5 mx-2" 
                 : "bg-transparent border border-transparent"
             }`}
           >
@@ -109,8 +109,8 @@ export default function Navbar() {
                   <img src="/logo.png" alt="Metrobrain Logo" className="w-full h-full object-contain" />
                 </div>
               </div>
-              <span className="text-sm md:text-lg font-heading font-black tracking-[-0.05em] text-white uppercase flex items-center">
-                METROBRAIN <span className="hidden sm:inline ml-1.5">TECHNOLOGY</span><span className="text-cyan-500 ml-0.5 text-2xl leading-none">.</span>
+              <span className="text-sm md:text-lg font-heading font-black tracking-[-0.05em] text-white uppercase flex flex-col md:flex-row md:items-center leading-none">
+                METROBRAIN <span className="text-[8px] md:text-base md:ml-1.5 opacity-50 md:opacity-100">TECHNOLOGY</span><span className="hidden md:inline text-cyan-500 ml-0.5 text-2xl leading-none">.</span>
               </span>
             </a>
 

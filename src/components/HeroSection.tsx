@@ -58,7 +58,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={container}
-      className="relative min-h-[85svh] flex flex-col items-center justify-center pt-10 px-6 overflow-hidden"
+      className="relative min-h-[85svh] flex flex-col items-center justify-center pt-24 md:pt-10 px-6 overflow-hidden"
     >
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         
