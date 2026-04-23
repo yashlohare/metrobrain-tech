@@ -46,7 +46,7 @@ export default function ContactModal() {
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", "YOUR_ACCESS_KEY_HERE"); // USER: Get your key from web3forms.com
+    formData.append("access_key", "14e52cb4-8b56-4a19-a22e-c4e061afcd19");
     if (selectedType) {
       formData.append("project_type", selectedType);
     }
