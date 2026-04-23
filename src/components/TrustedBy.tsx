@@ -34,6 +34,7 @@ export default function TrustedBy() {
   const container = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
+    // Stats animation
     gsap.from(".stat-card", {
       y: 40,
       opacity: 0,
@@ -46,42 +47,45 @@ export default function TrustedBy() {
       }
     });
 
-    gsap.from(".partner-logo", {
-      scale: 0.8,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.1,
-      ease: "back.out(1.7)",
-      scrollTrigger: {
-        trigger: ".partners-grid",
-        start: "top 85%",
-      }
-    });
+    // Infinite Marquee for Partners
+    const marquee = document.querySelector(".marquee-inner");
+    if (marquee) {
+      const w = marquee.scrollWidth;
+      gsap.to(marquee, {
+        x: `-${w / 2}`,
+        duration: 25,
+        repeat: -1,
+        ease: "none",
+      });
+    }
   }, { scope: container });
+
+  // Duplicate partners for seamless loop
+  const displayPartners = [...partners, ...partners];
 
   return (
     <section ref={container} className="relative py-24 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Top Section: Trusted By & Stats */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
           <div className="space-y-8">
             <h2 className="text-6xl md:text-8xl font-heading font-bold text-white tracking-tighter uppercase">
               Trusted By
             </h2>
             <p className="text-white/60 text-xl leading-relaxed max-w-xl font-light">
-              We're a family of innovators growing together. With 50+ clients worldwide, 
+              We're a family of innovators growing together. With 10+ clients worldwide, 
               Metrobrain continues to build trust, relationships, and impactful digital solutions.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 gap-6">
             {stats.map((stat, i) => (
               <div 
                 key={i} 
                 className="stat-card group relative bg-white/5 border border-white/10 rounded-[2.5rem] p-8 flex flex-col items-center justify-center text-center transition-all hover:bg-white/10 hover:border-cyan-500/30 overflow-hidden"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
                 <h3 className="text-4xl md:text-5xl font-black font-heading text-white mb-2 tracking-tighter">
                   {stat.number}
                 </h3>
@@ -93,41 +97,49 @@ export default function TrustedBy() {
           </div>
         </div>
 
-        {/* Bottom Section: Global Partners */}
-        <div className="space-y-12">
+        {/* Bottom Section: Global Partners Marquee */}
+        <div className="space-y-16">
           <div className="flex flex-col items-center">
-            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
-            <h4 className="text-[10px] font-heading font-black text-cyan-500/60 uppercase tracking-[0.6em] mb-12">
+            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12" />
+            <h4 className="text-[10px] font-heading font-black text-cyan-500/60 uppercase tracking-[0.6em]">
               Global Partners
             </h4>
           </div>
 
-          <div className="partners-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {partners.map((partner, i) => {
-              const PartnerIcon = partner.icon;
-              return (
-                <div key={i} className="partner-logo flex flex-col items-center gap-6 group">
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:bg-white/[0.08] group-hover:border-cyan-500/30 group-hover:scale-110 shadow-2xl">
-                    {partner.isLocal ? (
-                      <img 
-                        src={partner.logo} 
-                        alt={partner.name} 
-                        className="w-16 h-16 md:w-20 md:h-20 object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                      />
-                    ) : (
-                      PartnerIcon && <PartnerIcon className="w-10 h-10 md:w-12 md:h-12 text-white/20 group-hover:text-cyan-400 transition-all duration-500" />
-                    )}
+          <div className="relative w-full overflow-hidden mask-fade-edges py-8">
+            <div className="marquee-inner flex gap-12 w-max items-center">
+              {displayPartners.map((partner, i) => {
+                const PartnerIcon = partner.icon;
+                return (
+                  <div key={i} className="flex flex-col items-center gap-6 group px-8">
+                    <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:bg-white/[0.08] group-hover:border-cyan-500/30 group-hover:scale-105 shadow-2xl">
+                      {partner.isLocal ? (
+                        <img 
+                          src={partner.logo} 
+                          alt={partner.name} 
+                          className="w-20 h-20 md:w-24 md:h-24 object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                        />
+                      ) : (
+                        PartnerIcon && <PartnerIcon className="w-12 h-12 md:w-16 md:h-16 text-white/10 group-hover:text-cyan-400 transition-all duration-500" />
+                      )}
+                    </div>
+                    <span className="text-[10px] font-heading font-black text-white/10 uppercase tracking-[0.3em] group-hover:text-white transition-colors">
+                      {partner.name}
+                    </span>
                   </div>
-                  <span className="text-[9px] font-heading font-black text-white/20 uppercase tracking-[0.3em] group-hover:text-white transition-colors">
-                    {partner.name}
-                  </span>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
 
       </div>
+
+      <style jsx>{`
+        .mask-fade-edges {
+          mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+      `}</style>
 
       {/* Decorative background elements */}
       <div className="absolute top-1/2 left-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none" />
