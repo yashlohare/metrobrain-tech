@@ -5,6 +5,22 @@ import Link from "next/link";
 
 const articles = [
   {
+    slug: "agentic-ai-enterprise",
+    category: "AI & Automation",
+    title: "Agentic AI: The Next Frontier in Enterprise Workflows",
+    date: "Oct 18, 2026",
+    readTime: "10 min read",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    slug: "cloud-native-scalability",
+    category: "Cloud Engineering",
+    title: "Mastering Cloud-Native Scalability with Next.js 15",
+    date: "Oct 15, 2026",
+    readTime: "7 min read",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
+  },
+  {
     slug: "scaling-nextjs",
     category: "Architecture",
     title: "Scaling Next.js Applications for Enterprise Traffic",
@@ -19,14 +35,6 @@ const articles = [
     date: "Oct 05, 2026",
     readTime: "8 min read",
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2070&auto=format&fit=crop"
-  },
-  {
-    slug: "designing-for-conversion",
-    category: "UX Strategy",
-    title: "Designing for Conversion: High-Fidelity Interfaces",
-    date: "Sep 28, 2026",
-    readTime: "4 min read",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2070&auto=format&fit=crop"
   }
 ];
 

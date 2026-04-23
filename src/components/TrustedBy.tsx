@@ -74,7 +74,7 @@ export default function TrustedBy() {
               Trusted By
             </h2>
             <p className="text-white/60 text-xl leading-relaxed max-w-xl font-light">
-              We're a family of innovators growing together. With 10+ clients worldwide, 
+              We&apos;re a family of innovators growing together. With 10+ clients worldwide, 
               Metrobrain continues to build trust, relationships, and impactful digital solutions.
             </p>
           </div>

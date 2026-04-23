@@ -58,7 +58,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={container}
-      className="relative min-h-[85svh] flex flex-col items-center justify-center pt-24 md:pt-10 px-6 overflow-hidden"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center pt-24 md:pt-10 px-6 overflow-hidden"
     >
       <div className="relative z-10 max-w-5xl mx-auto text-center">
         
@@ -122,9 +122,24 @@ export default function HeroSection() {
             View Showcase
           </button>
         </div>
+      </div>
 
-
-
+      {/* Scroll Down Indicator */}
+      <div 
+        onClick={() => {
+          const element = document.getElementById('services');
+          if (element) {
+            gsap.to(window, {
+              duration: 1.2,
+              scrollTo: { y: element, offsetY: 80 },
+              ease: "power3.inOut"
+            });
+          }
+        }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer z-20 text-white/40 hover:text-cyan-400 transition-colors animate-bounce"
+      >
+        <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Scroll</span>
+        <ChevronDown className="w-5 h-5" />
       </div>
 
       {/* Hero-specific Ambient Glows */}

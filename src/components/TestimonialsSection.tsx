@@ -49,7 +49,7 @@ export default function TestimonialsSection() {
             Trusted by Industry Leaders.
           </h3>
           <p className="text-white/60 text-lg leading-relaxed font-light">
-            Don't just take our word for it. Here is what our strategic partners say about the impact of our digital solutions.
+            Don&apos;t just take our word for it. Here is what our strategic partners say about the impact of our digital solutions.
           </p>
         </div>
 
@@ -69,7 +69,7 @@ export default function TestimonialsSection() {
               </div>
 
               <p className="text-white/80 text-base md:text-lg leading-relaxed font-light italic mb-10 flex-1">
-                "{testimonial.quote}"
+                &quot;{testimonial.quote}&quot;
               </p>
 
               <div className="pt-6 border-t border-white/10 mt-auto">

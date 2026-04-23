@@ -146,7 +146,7 @@ export default function FoundryAssistant() {
                   <span className="text-gradient">v1.0</span>
                 </motion.h2>
                 <p className="text-lg md:text-xl text-slate-400 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed italic">
-                  "A proprietary intelligence layer architected for enterprise automation and strategic digital growth."
+                  &quot;A proprietary intelligence layer architected for enterprise automation and strategic digital growth.&quot;
                 </p>
               </div>
 

@@ -53,7 +53,7 @@ export default function NeuralIntro() {
               transition={{ duration: 1, ease: "easeOut" }}
               className="w-28 h-28 rounded-3xl border-2 border-cyan-500/20 flex items-center justify-center relative z-10 bg-slate-900/50 backdrop-blur-xl overflow-hidden"
             >
-              <img src="/logo.png" alt="Metrobrain Logo" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]" />
+              <img src="/logo.png" alt="Metrobrain Logo" className="w-20 h-20 rounded-2xl object-cover drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]" />
             </motion.div>
           </div>
 

@@ -78,7 +78,7 @@ export default function LeadershipSection() {
             <h3 className="text-3xl font-heading font-bold mb-2 text-white uppercase tracking-tighter">Foundry AI</h3>
             <p className="text-cyan-400 font-heading font-black text-[10px] mb-8 tracking-[0.2em] uppercase neon-glow">Intelligent Support Core</p>
             <p className="text-slate-300 mb-10 leading-relaxed font-light text-sm flex-1 italic">
-              "Our automated intelligence core is optimized for business process automation and technical consultancy, providing instant insights and streamlined project scoping."
+              &quot;Our automated intelligence core is optimized for business process automation and technical consultancy, providing instant insights and streamlined project scoping.&quot;
             </p>
             
             <button 

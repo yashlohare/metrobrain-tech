@@ -62,7 +62,7 @@ export default function LMSPrototype() {
               <div className="goal-bar"><div className="bg-purple-500 shadow-[0_0_15px_rgba(108,92,231,0.5)]" style={{ width: '70%' }} /></div>
               <span>14 / 20 hrs</span>
             </div>
-            <p className="text-xs">You're on track! Only 6 hours left to reach your weekly milestone.</p>
+            <p className="text-xs">You&apos;re on track! Only 6 hours left to reach your weekly milestone.</p>
           </div>
         </aside>
 

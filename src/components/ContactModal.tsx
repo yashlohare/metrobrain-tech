@@ -40,6 +40,7 @@ export default function ContactModal() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -93,6 +94,8 @@ export default function ContactModal() {
     const handleOpen = () => {
       setIsSubmitted(false);
       setIsOpen(true);
+      setIsSyncing(true);
+      setTimeout(() => setIsSyncing(false), 1500);
     };
     window.addEventListener("open-contact", handleOpen);
     return () => window.removeEventListener("open-contact", handleOpen);
@@ -112,10 +115,30 @@ export default function ContactModal() {
         {/* Close Button */}
         <button 
           onClick={() => setIsOpen(false)}
-          className="absolute top-6 right-6 p-2 bg-white/5 hover:bg-white/10 rounded-full text-white transition-all z-20"
+          className="absolute top-6 right-6 p-2 bg-white/5 hover:bg-white/10 rounded-full text-white transition-all z-[30]"
         >
           <X className="w-5 h-5" />
         </button>
+
+        {isSyncing && (
+          <div className="absolute inset-0 z-20 bg-[#0A0A0F] flex flex-col items-center justify-center space-y-8 animate-in fade-in duration-500">
+            <div className="relative w-32 h-32">
+              <div className="absolute inset-0 border-2 border-cyan-500/20 rounded-full animate-[spin_3s_linear_infinite]" />
+              <div className="absolute inset-2 border border-violet-500/30 rounded-full animate-[spin_2s_linear_infinite_reverse]" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center border border-cyan-500/20 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
+                  <div className="w-2 h-2 bg-cyan-500 rounded-full animate-ping" />
+                </div>
+              </div>
+            </div>
+            <div className="space-y-2 text-center">
+              <h4 className="text-sm font-bold tracking-[0.4em] uppercase text-cyan-400 animate-pulse">Establishing Neural Sync</h4>
+              <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden mx-auto">
+                <div className="h-full bg-gradient-to-r from-cyan-500 to-violet-500 animate-[shimmer_1.5s_infinite]" style={{ width: '60%' }} />
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-col md:flex-row relative z-10 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">
           

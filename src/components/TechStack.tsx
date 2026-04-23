@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 
 const technologies = [
@@ -18,7 +19,7 @@ const technologies = [
 ];
 
 export default function TechStack() {
-  // Duplicate array to create a seamless loop
+  const [isPaused, setIsPaused] = useState(false);
   const duplicatedTech = [...technologies, ...technologies, ...technologies];
 
   return (
@@ -34,7 +35,11 @@ export default function TechStack() {
         </h3>
       </div>
 
-      <div className="relative w-full flex overflow-hidden group">
+      <div 
+        className="relative w-full flex overflow-hidden group cursor-pointer"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         {/* Left Gradient Mask */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
         
@@ -42,28 +47,29 @@ export default function TechStack() {
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
         <motion.div
-          animate={{ x: ["0%", "-33.33%"] }}
+          animate={{ x: isPaused ? undefined : ["0%", "-33.33%"] }}
           transition={{
             repeat: Infinity,
             ease: "linear",
-            duration: 20,
+            duration: 25,
           }}
           className="flex whitespace-nowrap items-center py-4"
         >
           {duplicatedTech.map((tech, index) => (
-            <div
+            <motion.div
               key={index}
-              className="flex items-center gap-4 px-8 py-4 mx-4 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-colors group/item"
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="flex items-center gap-4 px-10 py-6 mx-4 rounded-3xl bg-white/[0.03] border border-white/5 hover:border-cyan-500/30 hover:bg-white/[0.08] transition-all duration-500 group/item shadow-2xl backdrop-blur-sm"
             >
               <img 
                 src={tech.iconUrl} 
                 alt={`${tech.name} Logo`} 
-                className="w-6 h-6 object-contain grayscale opacity-70 group-hover/item:grayscale-0 group-hover/item:opacity-100 transition-all duration-300"
+                className="w-8 h-8 object-contain transition-all duration-500 group-hover/item:scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
               />
-              <span className="text-white/80 font-bold tracking-wider uppercase text-sm group-hover/item:text-white">
+              <span className="text-white/40 font-heading font-black tracking-[0.2em] uppercase text-[10px] group-hover/item:text-white group-hover/item:tracking-[0.3em] transition-all duration-500">
                 {tech.name}
               </span>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

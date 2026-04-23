@@ -3,6 +3,7 @@ import { Space_Grotesk, Outfit } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import NeuralIntro from "@/components/NeuralIntro";
 import ContactModal from "@/components/ContactModal";
+import NeuralCursor from "@/components/NeuralCursor";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -18,12 +19,12 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Metrobrain Technology | Advanced Software Engineering",
-  description: "Elite intelligence & software engineering engineering next-gen digital ecosystems through advanced R&D.",
-  keywords: ["AI Engineering", "Web3", "Next.js 15", "Metrobrain", "Software Engineering", "Cybersecurity"],
+  title: "Metrobrain Technology | Elite Custom Software Engineering",
+  description: "Architect next-gen digital ecosystems with our elite custom software engineering & Agentic AI solutions. Elevate your enterprise performance today ✓",
+  keywords: ["AI Engineering", "Agentic AI", "Next.js 15", "Metrobrain", "Cloud Architecture", "Cybersecurity", "Custom Software"],
   openGraph: {
-    title: "Metrobrain Technology | Advanced Software Engineering",
-    description: "Elite intelligence & software foundry engineering next-gen digital ecosystems.",
+    title: "Metrobrain Technology | Elite Custom Software Engineering",
+    description: "Architect next-gen digital ecosystems with our elite custom software engineering & Agentic AI solutions. Elevate your enterprise performance today ✓",
     url: "https://metrobrain.tech",
     siteName: "Metrobrain Technology",
     locale: "en_US",
@@ -31,8 +32,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Metrobrain Technology | Advanced Software Engineering",
-    description: "Elite intelligence & software engineering engineering next-gen digital ecosystems.",
+    title: "Metrobrain Technology | Elite Custom Software Engineering",
+    description: "Architect next-gen digital ecosystems with our elite custom software engineering & Agentic AI solutions. Elevate your enterprise performance today ✓",
   },
   robots: {
     index: true,
@@ -63,6 +64,7 @@ export default function RootLayout({
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       <body className="min-h-full flex flex-col font-body bg-[#020617] text-slate-50 selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden" suppressHydrationWarning>
+        <NeuralCursor />
         <NeuralIntro />
         <Navbar />
         {children}
