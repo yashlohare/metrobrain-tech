@@ -109,8 +109,8 @@ export default function Navbar() {
                   <img src="/logo.png" alt="Metrobrain Logo" className="w-full h-full object-contain" />
                 </div>
               </div>
-              <span className="text-sm md:text-lg font-heading font-black tracking-[-0.05em] text-white uppercase flex flex-col md:flex-row md:items-center leading-none">
-                METROBRAIN <span className="text-[8px] md:text-base md:ml-1.5 opacity-50 md:opacity-100">TECHNOLOGY</span><span className="hidden md:inline text-cyan-500 ml-0.5 text-2xl leading-none">.</span>
+              <span className="text-[10px] sm:text-lg font-heading font-black tracking-[-0.05em] text-white uppercase flex items-center gap-1.5 leading-none">
+                METROBRAIN TECHNOLOGY<span className="text-cyan-500 text-2xl leading-none">.</span>
               </span>
             </a>
 
@@ -171,7 +171,7 @@ export default function Navbar() {
               <div className="flex items-center gap-3">
                 <img src="/logo.png" alt="Metrobrain Logo" className="w-8 h-8 object-contain" />
                 <span className="text-xl font-heading font-black text-white uppercase">
-                  METROBRAIN<span className="text-cyan-500">.</span>
+                  METROBRAIN TECHNOLOGY<span className="text-cyan-500">.</span>
                 </span>
               </div>
               <button 
