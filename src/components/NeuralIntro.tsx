@@ -71,7 +71,7 @@ export default function NeuralIntro() {
                  times: [0, 0.7, 1],
                  ease: "easeOut"
                }}
-               className="text-white text-4xl md:text-7xl font-heading font-bold uppercase tracking-[0.4em]"
+               className="text-white text-2xl md:text-7xl font-heading font-bold uppercase tracking-[0.2em] md:tracking-[0.4em]"
              >
                 METROBRAIN
              </motion.h1>

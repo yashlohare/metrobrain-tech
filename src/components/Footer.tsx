@@ -95,11 +95,15 @@ export default function Footer() {
         </div>
 
         {/* Giant Brand Name */}
-        <div className="relative mb-12">
+        <div className="relative mb-12 flex flex-col items-center">
+          <div className="w-24 h-24 mb-6 relative">
+            <div className="absolute inset-0 bg-cyan-500/20 blur-2xl rounded-full" />
+            <img src="/logo.png" alt="Metrobrain Logo" className="w-full h-full object-contain relative z-10" />
+          </div>
           <h2 className="text-[7.5vw] font-black text-white leading-none tracking-tighter text-center select-none opacity-[0.03] absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 pointer-events-none whitespace-nowrap">
             METROBRAIN TECHNOLOGY
           </h2>
-          <h2 className="text-[6.5vw] md:text-[7.5vw] font-black text-white leading-none tracking-tighter text-center select-none whitespace-nowrap">
+          <h2 className="text-[6.5vw] md:text-[7.5vw] font-black text-white leading-none tracking-tighter text-center select-none whitespace-nowrap uppercase">
             Metrobrain Technology
           </h2>
         </div>

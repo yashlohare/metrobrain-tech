@@ -106,7 +106,7 @@ export default function ProjectsShowcase() {
 
         {/* Full-width Carousel Slider */}
         <div 
-          className="project-slider relative w-full h-[450px] md:h-[550px] rounded-[2rem] overflow-hidden border border-white/10 group"
+          className="project-slider relative w-full h-[500px] md:h-[550px] rounded-[2rem] overflow-hidden border border-white/10 group"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -124,24 +124,24 @@ export default function ProjectsShowcase() {
           </div>
 
           {/* Bottom Overlay Content */}
-          <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 flex flex-col md:flex-row justify-between items-end gap-8">
+          <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-8">
             
             {/* Project Details */}
-            <div className="max-w-3xl flex flex-col items-start gap-6">
+            <div className="max-w-3xl flex flex-col items-start gap-4 md:gap-6">
               <div>
                 <Link href={`/project/${activeProject.slug}`}>
-                  <h3 className="text-4xl md:text-6xl font-black font-heading text-white tracking-tighter mb-4 hover:text-cyan-400 transition-colors">
-                    {activeProject.name.toUpperCase()}
+                  <h3 className="text-3xl md:text-6xl font-black font-heading text-white tracking-tighter mb-2 md:mb-4 hover:text-cyan-400 transition-colors uppercase">
+                    {activeProject.name}
                   </h3>
                 </Link>
-                <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-6">
+                <p className="text-white/70 text-sm md:text-xl leading-relaxed mb-4 md:mb-6 line-clamp-2 md:line-clamp-none">
                   {activeProject.desc}
                 </p>
                 
                 {/* ROI Metrics */}
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-wrap gap-2 md:gap-4">
                   {activeProject.metrics?.map((metric, idx) => (
-                    <div key={idx} className="px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm font-bold tracking-widest uppercase">
+                    <div key={idx} className="px-3 py-1.5 md:px-4 md:py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-[10px] md:text-sm font-bold tracking-widest uppercase">
                       {metric}
                     </div>
                   ))}
@@ -150,15 +150,15 @@ export default function ProjectsShowcase() {
               
               <Link 
                 href={`/project/${activeProject.slug}`}
-                className="group/btn flex items-center gap-3 px-8 py-4 bg-white/10 hover:bg-white text-white hover:text-black rounded-xl border border-white/20 transition-all font-bold tracking-widest uppercase text-xs mt-4"
+                className="group/btn flex items-center gap-3 px-6 py-3 md:px-8 md:py-4 bg-white/10 hover:bg-white text-white hover:text-black rounded-xl border border-white/20 transition-all font-bold tracking-widest uppercase text-[10px] md:text-xs mt-2 md:mt-4"
               >
-                View Case Study
+                View Our Work
                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* Navigation Arrows */}
-            <div className="flex gap-4 shrink-0">
+            <div className="flex gap-4 shrink-0 self-end md:self-auto">
               <button 
                 onClick={handlePrev}
                 className="w-14 h-14 rounded-full border border-white/20 bg-black/50 backdrop-blur-md flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"

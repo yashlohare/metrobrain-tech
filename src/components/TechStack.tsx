@@ -7,7 +7,7 @@ const technologies = [
   { name: "React", iconUrl: "https://cdn.simpleicons.org/react/61DAFB" },
   { name: "TypeScript", iconUrl: "https://cdn.simpleicons.org/typescript/3178C6" },
   { name: "Node.js", iconUrl: "https://cdn.simpleicons.org/nodedotjs/339933" },
-  { name: "AWS", iconUrl: "https://cdn.simpleicons.org/amazonaws/FF9900" },
+  { name: "AWS", iconUrl: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" },
   { name: "Google Cloud", iconUrl: "https://cdn.simpleicons.org/googlecloud/4285F4" },
   { name: "PostgreSQL", iconUrl: "https://cdn.simpleicons.org/postgresql/4169E1" },
   { name: "Docker", iconUrl: "https://cdn.simpleicons.org/docker/2496ED" },

@@ -208,9 +208,13 @@ export default function FoundryAssistant() {
                             rotate: [45, 48, 45]
                           }}
                           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                          className="w-44 h-44 md:w-64 md:h-64 bg-slate-900/50 backdrop-blur-3xl rounded-[4rem] shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/10 flex items-center justify-center relative rotate-45 group hover:border-cyan-500/40 transition-all duration-700"
+                          className="w-44 h-44 md:w-64 md:h-64 bg-slate-900/50 backdrop-blur-3xl rounded-[4rem] shadow-[0_0_100px_rgba(0,0,0,0.5)] border border-white/10 flex items-center justify-center relative rotate-45 group hover:border-cyan-500/40 transition-all duration-700 overflow-hidden"
                         >
-                          <Bot className="w-24 h-24 text-white -rotate-45 drop-shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-transform group-hover:scale-110" strokeWidth={1} />
+                          <img 
+                            src="/logo.png" 
+                            alt="Metrobrain Logo" 
+                            className="w-32 h-32 md:w-48 md:h-48 -rotate-45 object-contain drop-shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-transform group-hover:scale-110" 
+                          />
                         </motion.div>
                       </div>
                     </div>
@@ -226,8 +230,8 @@ export default function FoundryAssistant() {
                     {/* Chat Header */}
                     <div className="p-8 border-b border-white/5 flex items-center justify-between bg-white/5">
                       <div className="flex items-center gap-5">
-                        <div className="w-14 h-14 rounded-2xl bg-cyan-600 shadow-2xl shadow-cyan-500/20 flex items-center justify-center text-white border border-white/10">
-                          <Bot className="w-7 h-7" />
+                        <div className="w-14 h-14 rounded-2xl bg-cyan-600/20 shadow-2xl shadow-cyan-500/20 flex items-center justify-center text-white border border-white/10 overflow-hidden">
+                          <img src="/logo.png" alt="Metrobrain Logo" className="w-10 h-10 object-contain" />
                         </div>
                         <div>
                           <h4 className="font-heading font-bold text-xl text-white uppercase tracking-tight">Foundry AI</h4>

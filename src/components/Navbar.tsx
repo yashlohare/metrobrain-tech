@@ -4,6 +4,11 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Cpu, Terminal } from "lucide-react";
 import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollToPlugin);
+}
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -49,6 +54,37 @@ export default function Navbar() {
     });
   };
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const targetId = href.replace("/#", "");
+    const element = document.getElementById(targetId);
+    if (element) {
+      const navHeight = navRef.current?.offsetHeight || 0;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navHeight - 20;
+
+      // Animate scroll using GSAP for "animations and graphics" feel
+      gsap.to(window, {
+        scrollTo: { y: offsetPosition, autoKill: false },
+        duration: 1.2,
+        ease: "power4.inOut",
+        onStart: () => {
+          // Add a temporary "Neural Link" graphic effect
+          const scanLine = document.createElement('div');
+          scanLine.className = 'fixed inset-0 z-[100] pointer-events-none bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent h-1 w-full shadow-[0_0_20px_rgba(6,182,212,0.5)]';
+          document.body.appendChild(scanLine);
+          gsap.to(scanLine, {
+            top: '100%',
+            duration: 1.2,
+            ease: "none",
+            onComplete: () => scanLine.remove()
+          });
+        }
+      });
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
     <>
       <nav
@@ -73,8 +109,8 @@ export default function Navbar() {
                   <img src="/logo.png" alt="Metrobrain Logo" className="w-full h-full object-contain" />
                 </div>
               </div>
-              <span className="text-lg font-heading font-black tracking-[-0.05em] text-white uppercase flex items-center">
-                METROBRAIN TECHNOLOGY<span className="text-cyan-500 ml-0.5 text-2xl leading-none">.</span>
+              <span className="text-sm md:text-lg font-heading font-black tracking-[-0.05em] text-white uppercase flex items-center">
+                METROBRAIN <span className="hidden sm:inline ml-1.5">TECHNOLOGY</span><span className="text-cyan-500 ml-0.5 text-2xl leading-none">.</span>
               </span>
             </a>
 
@@ -85,6 +121,7 @@ export default function Navbar() {
                   <a 
                     key={link.name} 
                     href={link.href}
+                    onClick={(e) => scrollToSection(e, link.href)}
                     onMouseMove={handleMagnetic}
                     onMouseLeave={resetMagnetic}
                     className="px-4 py-2 text-[10px] font-bold text-white/50 hover:text-white transition-all tracking-[0.3em] uppercase relative group"
@@ -131,9 +168,12 @@ export default function Navbar() {
             className="fixed inset-0 z-[60] bg-[#020617] md:hidden flex flex-col"
           >
             <div className="p-8 flex justify-between items-center border-b border-white/5">
-              <span className="text-xl font-heading font-black text-white uppercase">
-                METROBRAIN TECHNOLOGY<span className="text-cyan-500">.</span>
-              </span>
+              <div className="flex items-center gap-3">
+                <img src="/logo.png" alt="Metrobrain Logo" className="w-8 h-8 object-contain" />
+                <span className="text-xl font-heading font-black text-white uppercase">
+                  METROBRAIN<span className="text-cyan-500">.</span>
+                </span>
+              </div>
               <button 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="p-3 bg-white/5 rounded-full text-white hover:bg-white/10 transition-all"
@@ -150,7 +190,7 @@ export default function Navbar() {
                   transition={{ delay: i * 0.1 }}
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => scrollToSection(e, link.href)}
                   className="text-6xl font-heading font-black tracking-tighter text-white hover:text-cyan-400 transition-colors uppercase"
                 >
                   {link.name}
