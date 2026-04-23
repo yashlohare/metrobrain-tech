@@ -76,9 +76,9 @@ const PricingCard = ({ tier, i }: { tier: any, i: number }) => {
       {/* Badge placed exactly on the top border of the outer card */}
       {tier.featured && (
         <div className="absolute -top-3 left-0 w-full flex justify-center z-20">
-          <span className="inline-block px-4 py-1 bg-[#020617] text-[10px] font-bold uppercase tracking-widest text-cyan-400 border border-cyan-400/50 rounded-full shadow-[0_0_20px_rgba(34,211,238,0.2)]">
-            Neural Foundry Pick
-          </span>
+            <span className="inline-block px-4 py-1 bg-[#020617] text-[10px] font-bold uppercase tracking-widest text-cyan-400 border border-cyan-400/50 rounded-full shadow-[0_0_20px_rgba(34,211,238,0.2)]">
+              Metrobrain Choice
+            </span>
         </div>
       )}
 

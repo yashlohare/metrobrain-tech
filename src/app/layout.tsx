@@ -18,11 +18,11 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Metrobrain Technology | AI Software Foundry",
-  description: "Elite intelligence & software foundry engineering next-gen digital ecosystems through advanced R&D.",
-  keywords: ["AI Engineering", "Web3", "Next.js 15", "Metrobrain", "Software Foundry", "Cybersecurity"],
+  title: "Metrobrain Technology | Advanced Software Engineering",
+  description: "Elite intelligence & software engineering engineering next-gen digital ecosystems through advanced R&D.",
+  keywords: ["AI Engineering", "Web3", "Next.js 15", "Metrobrain", "Software Engineering", "Cybersecurity"],
   openGraph: {
-    title: "Metrobrain Technology | AI Software Foundry",
+    title: "Metrobrain Technology | Advanced Software Engineering",
     description: "Elite intelligence & software foundry engineering next-gen digital ecosystems.",
     url: "https://metrobrain.tech",
     siteName: "Metrobrain Technology",
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Metrobrain Technology | AI Software Foundry",
-    description: "Elite intelligence & software foundry engineering next-gen digital ecosystems.",
+    title: "Metrobrain Technology | Advanced Software Engineering",
+    description: "Elite intelligence & software engineering engineering next-gen digital ecosystems.",
   },
   robots: {
     index: true,

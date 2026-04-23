@@ -234,7 +234,7 @@ export default function FoundryAssistant() {
                           <img src="/logo.png" alt="Metrobrain Logo" className="w-10 h-10 object-contain" />
                         </div>
                         <div>
-                          <h4 className="font-heading font-bold text-xl text-white uppercase tracking-tight">Foundry AI</h4>
+                          <h4 className="font-heading font-bold text-xl text-white uppercase tracking-tight">Metrobrain AI</h4>
                           <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
                             <p className="text-[9px] font-heading font-black text-slate-500 tracking-[0.2em] uppercase">Status: Secure Connection</p>

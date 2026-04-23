@@ -104,7 +104,7 @@ export default function NeuralIntro() {
               className="mt-8 text-[10px] font-heading font-black text-cyan-500/60 uppercase tracking-[0.6em] flex items-center gap-3"
             >
                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
-               Synchronizing Neural Foundry
+               Synchronizing Neural Systems
             </motion.p>
           </motion.div>
 

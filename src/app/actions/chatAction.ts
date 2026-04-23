@@ -1,7 +1,7 @@
 "use server";
 
 // Foundry Persona Definition
-const SYSTEM_PROMPT = `You are Foundry, the Technical AI at Metrobrain Technology. 
+const SYSTEM_PROMPT = `You are Metrobrain AI, the Technical Intelligence at Metrobrain Technology. 
 Our foundry specializes in:
 1. High-Performance Web Architectures (Next.js, React).
 2. Cross-platform Mobile Ecosystems (iOS, Android).
@@ -54,7 +54,7 @@ export async function getFoundryResponse(message: string) {
 
   if (msg.includes("hello") || msg.includes("hi") || msg.includes("namaste")) {
     return {
-      content: "Namaste! I am Foundry, your Technical Agent. I can guide you through our services, show you our work, or help you start a new project. What can I do for you?",
+      content: "Namaste! I am Metrobrain AI, your Technical Intelligence. I can guide you through our engineering services, show you our work, or help you start a new project. How can I assist you today?",
       action: null
     };
   }
