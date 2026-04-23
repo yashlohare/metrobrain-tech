@@ -39,15 +39,33 @@ export default function ContactForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Mock submission delay
-    setTimeout(() => {
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", "YOUR_ACCESS_KEY_HERE"); // USER: Get your key from web3forms.com
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSubmitted(true);
+        e.currentTarget.reset();
+        setTimeout(() => setIsSubmitted(false), 5000);
+      } else {
+        alert("Something went wrong. Please try again or contact us directly via email.");
+      }
+    } catch (error) {
+      alert("Network error. Please check your connection.");
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1500);
+    }
   };
 
   return (
@@ -130,6 +148,7 @@ export default function ContactForm() {
                     <label className="text-sm font-semibold text-white/40 ml-1">Your Name</label>
                     <input 
                       required
+                      name="name"
                       type="text" 
                       placeholder="Ramesh Kumar" 
                       className="w-full bg-transparent border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan-500/50 transition-all"
@@ -139,6 +158,7 @@ export default function ContactForm() {
                     <label className="text-sm font-semibold text-white/40 ml-1">Your Email</label>
                     <input 
                       required
+                      name="email"
                       type="email" 
                       placeholder="ramesh@example.com" 
                       className="w-full bg-transparent border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan-500/50 transition-all"
@@ -150,6 +170,7 @@ export default function ContactForm() {
                   <label className="text-sm font-semibold text-white/40 ml-1">Subject</label>
                   <input 
                     required
+                    name="subject"
                     type="text" 
                     placeholder="How can we help?" 
                     className="w-full bg-transparent border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan-500/50 transition-all"
@@ -160,6 +181,7 @@ export default function ContactForm() {
                   <label className="text-sm font-semibold text-white/40 ml-1">Message</label>
                   <textarea 
                     required
+                    name="message"
                     placeholder="Tell us about your project..." 
                     rows={5}
                     className="w-full bg-transparent border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan-500/50 transition-all resize-none"

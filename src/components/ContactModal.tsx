@@ -41,13 +41,36 @@ export default function ContactModal() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+
+    const formData = new FormData(e.currentTarget);
+    formData.append("access_key", "YOUR_ACCESS_KEY_HERE"); // USER: Get your key from web3forms.com
+    if (selectedType) {
+      formData.append("project_type", selectedType);
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setIsSubmitted(true);
+        e.currentTarget.reset();
+        setSelectedType(null);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Network error. Please try again.");
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 1500);
+    }
   };
 
   useEffect(() => {
@@ -153,17 +176,17 @@ export default function ContactModal() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 ml-1">Full Name</label>
-                    <input required type="text" placeholder="e.g. John Doe" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all" />
+                    <input required name="full_name" type="text" placeholder="e.g. John Doe" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all" />
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 ml-1">Email Address</label>
-                    <input required type="email" placeholder="e.g. john@company.com" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all" />
+                    <input required name="email" type="email" placeholder="e.g. john@company.com" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all" />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 ml-1">Contact Number</label>
-                  <input required type="tel" placeholder="e.g. +91 00000 00000" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all" />
+                  <input required name="phone" type="tel" placeholder="e.g. +91 00000 00000" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all" />
                 </div>
 
                 <div className="space-y-2">
@@ -188,7 +211,7 @@ export default function ContactModal() {
 
                 <div className="space-y-2 flex-1 flex flex-col">
                   <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 ml-1">Message</label>
-                  <textarea required placeholder="Describe your project vision..." className="w-full flex-1 min-h-[120px] bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all resize-none" />
+                  <textarea required name="message" placeholder="Describe your project vision..." className="w-full flex-1 min-h-[120px] bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all resize-none" />
                 </div>
 
                 <button 
