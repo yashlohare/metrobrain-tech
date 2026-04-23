@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import NeuralIntro from "@/components/NeuralIntro";
 import ContactModal from "@/components/ContactModal";
 import NeuralCursor from "@/components/NeuralCursor";
+import HackerTerminal from "@/components/HackerTerminal";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -66,6 +67,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-body bg-[#020617] text-slate-50 selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden" suppressHydrationWarning>
         <NeuralCursor />
         <NeuralIntro />
+        <HackerTerminal />
         <Navbar />
         {children}
         <ContactModal />

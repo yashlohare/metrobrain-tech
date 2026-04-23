@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Cpu, Terminal } from "lucide-react";
+import { useUIInteraction } from "@/hooks/useUIInteraction";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
@@ -14,6 +15,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const { playTick } = useUIInteraction();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -130,6 +132,7 @@ export default function Navbar() {
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
                     onMouseMove={handleMagnetic}
+                    onMouseEnter={playTick}
                     onMouseLeave={resetMagnetic}
                     className="px-4 py-2 text-[10px] font-bold text-white/50 hover:text-white transition-all tracking-[0.3em] uppercase relative group"
                   >
@@ -142,6 +145,7 @@ export default function Navbar() {
               <div className="h-6 w-[1px] bg-white/10 mx-2" />
 
               <button 
+                onMouseEnter={playTick}
                 onClick={() => window.dispatchEvent(new CustomEvent('open-contact'))}
                 className="group relative px-6 py-2.5 bg-white text-black text-[10px] font-black rounded-full transition-all duration-500 overflow-hidden"
               >

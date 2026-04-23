@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { X, Send, Phone, Mail, Cpu } from "lucide-react";
+import { useUIInteraction } from "@/hooks/useUIInteraction";
 
 const LinkedinIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -41,6 +42,7 @@ export default function ContactModal() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const { playSuccess } = useUIInteraction();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -80,6 +82,7 @@ export default function ContactModal() {
 
       if (data.success) {
         setIsSubmitted(true);
+        playSuccess();
         localStorage.setItem("last_submission_modal", Date.now().toString());
         e.currentTarget.reset();
         setSelectedType(null);
