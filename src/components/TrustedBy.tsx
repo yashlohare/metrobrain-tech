@@ -27,7 +27,7 @@ const partners = [
   { name: "EduCore", logo: "/partners/educore.png", icon: Globe },
   { name: "Aura Real Estate", logo: "/partners/aura.png", icon: Globe },
   { name: "OM SAI", logo: "/partners/om-sai.jpg", isLocal: true, icon: Globe },
-  { name: "Partner 2", logo: "/partners/partner-2.png", isLocal: true, icon: Globe }
+  { name: "Metrobrain Educare Pvt.Ltd", logo: "/partners/partner-2.png", isLocal: true, icon: Globe }
 ];
 
 export default function TrustedBy() {
