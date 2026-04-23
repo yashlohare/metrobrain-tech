@@ -8,22 +8,16 @@ import { Award, Users, Rocket, Globe } from "lucide-react";
 
 const stats = [
   { 
-    number: "70+", 
-    label: "Our Projects", 
+    number: "06", 
+    label: "Live Projects", 
     icon: Rocket,
     color: "from-blue-600 to-blue-400" 
   },
   { 
-    number: "50+", 
+    number: "10+", 
     label: "Happy Clients", 
     icon: Users,
     color: "from-cyan-600 to-cyan-400" 
-  },
-  { 
-    number: "12+", 
-    label: "Project Awards", 
-    icon: Award,
-    color: "from-sky-600 to-sky-400" 
   }
 ];
 
@@ -32,8 +26,8 @@ const partners = [
   { name: "SwiftBite", logo: "/partners/swiftbite.png", icon: Globe },
   { name: "EduCore", logo: "/partners/educore.png", icon: Globe },
   { name: "Aura Real Estate", logo: "/partners/aura.png", icon: Globe },
-  { name: "OM SAI", logo: "/partners/om-sai.jpg", isLocal: true },
-  { name: "Partner 2", logo: "/partners/partner-2.png", isLocal: true }
+  { name: "OM SAI", logo: "/partners/om-sai.jpg", isLocal: true, icon: Globe },
+  { name: "Partner 2", logo: "/partners/partner-2.png", isLocal: true, icon: Globe }
 ];
 
 export default function TrustedBy() {
@@ -109,24 +103,27 @@ export default function TrustedBy() {
           </div>
 
           <div className="partners-grid grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            {partners.map((partner, i) => (
-              <div key={i} className="partner-logo flex flex-col items-center gap-6 group">
-                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:bg-white/[0.08] group-hover:border-cyan-500/30 group-hover:scale-110 shadow-2xl">
-                  {partner.isLocal ? (
-                    <img 
-                      src={partner.logo} 
-                      alt={partner.name} 
-                      className="w-16 h-16 md:w-20 md:h-20 object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                    />
-                  ) : (
-                    <partner.icon className="w-10 h-10 md:w-12 md:h-12 text-white/20 group-hover:text-cyan-400 transition-all duration-500" />
-                  )}
+            {partners.map((partner, i) => {
+              const PartnerIcon = partner.icon;
+              return (
+                <div key={i} className="partner-logo flex flex-col items-center gap-6 group">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:bg-white/[0.08] group-hover:border-cyan-500/30 group-hover:scale-110 shadow-2xl">
+                    {partner.isLocal ? (
+                      <img 
+                        src={partner.logo} 
+                        alt={partner.name} 
+                        className="w-16 h-16 md:w-20 md:h-20 object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                      />
+                    ) : (
+                      PartnerIcon && <PartnerIcon className="w-10 h-10 md:w-12 md:h-12 text-white/20 group-hover:text-cyan-400 transition-all duration-500" />
+                    )}
+                  </div>
+                  <span className="text-[9px] font-heading font-black text-white/20 uppercase tracking-[0.3em] group-hover:text-white transition-colors">
+                    {partner.name}
+                  </span>
                 </div>
-                <span className="text-[9px] font-heading font-black text-white/20 uppercase tracking-[0.3em] group-hover:text-white transition-colors">
-                  {partner.name}
-                </span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
