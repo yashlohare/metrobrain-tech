@@ -22,12 +22,12 @@ const stats = [
 ];
 
 const partners = [
-  { name: "Nexus Commerce", logo: "/partners/nexus.png", icon: Globe },
-  { name: "SwiftBite", logo: "/partners/swiftbite.png", icon: Globe },
-  { name: "EduCore", logo: "/partners/educore.png", icon: Globe },
-  { name: "Aura Real Estate", logo: "/partners/aura.png", icon: Globe },
-  { name: "OM SAI", logo: "/partners/om-sai.jpg", isLocal: true, icon: Globe },
-  { name: "Metrobrain Educare Pvt.Ltd", logo: "/partners/partner-2.png", isLocal: true, icon: Globe }
+  { name: "Nexus Commerce", logo: "/partners/nexus.png", isLocal: true },
+  { name: "SwiftBite", logo: "/partners/swiftbite.png", isLocal: true },
+  { name: "EduCore", logo: "/partners/educore.png", isLocal: true },
+  { name: "Aura Real Estate", logo: "/partners/aura.png", isLocal: true },
+  { name: "OM SAI", logo: "/partners/om-sai.jpg", isLocal: true },
+  { name: "Metrobrain Educare Pvt.Ltd", logo: "/partners/partner-2.png", isLocal: true }
 ];
 
 export default function TrustedBy() {
@@ -117,7 +117,7 @@ export default function TrustedBy() {
                         <img 
                           src={partner.logo} 
                           alt={partner.name} 
-                          className="w-20 h-20 md:w-24 md:h-24 object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                          className="w-20 h-20 md:w-24 md:h-24 object-contain transition-all duration-500 drop-shadow-2xl group-hover:scale-110"
                         />
                       ) : (
                         PartnerIcon && <PartnerIcon className="w-12 h-12 md:w-16 md:h-16 text-white/10 group-hover:text-cyan-400 transition-all duration-500" />
