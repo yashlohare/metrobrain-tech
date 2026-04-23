@@ -43,10 +43,25 @@ export default function ContactModal() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Client-side Rate Limiting (60s Cooldown)
+    const lastSub = localStorage.getItem("last_submission_modal");
+    const now = Date.now();
+    if (lastSub && now - parseInt(lastSub) < 60000) {
+      alert("Please wait a moment before sending another message (60s cooldown).");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
     formData.append("access_key", "14e52cb4-8b56-4a19-a22e-c4e061afcd19");
+
+    // Honeypot check
+    if (formData.get("botcheck")) {
+      setIsSubmitting(false);
+      return;
+    }
     if (selectedType) {
       formData.append("project_type", selectedType);
     }
@@ -61,6 +76,7 @@ export default function ContactModal() {
 
       if (data.success) {
         setIsSubmitted(true);
+        localStorage.setItem("last_submission_modal", Date.now().toString());
         e.currentTarget.reset();
         setSelectedType(null);
       } else {
@@ -173,6 +189,9 @@ export default function ContactModal() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-6 h-full">
+                {/* Honeypot Field */}
+                <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
+                
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 ml-1">Full Name</label>

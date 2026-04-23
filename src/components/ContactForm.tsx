@@ -41,10 +41,25 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Client-side Rate Limiting (60s Cooldown)
+    const lastSub = localStorage.getItem("last_submission");
+    const now = Date.now();
+    if (lastSub && now - parseInt(lastSub) < 60000) {
+      alert("Please wait a moment before sending another message (60s cooldown).");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
     formData.append("access_key", "14e52cb4-8b56-4a19-a22e-c4e061afcd19");
+
+    // Honeypot check
+    if (formData.get("botcheck")) {
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -56,6 +71,7 @@ export default function ContactForm() {
 
       if (data.success) {
         setIsSubmitted(true);
+        localStorage.setItem("last_submission", Date.now().toString());
         e.currentTarget.reset();
         setTimeout(() => setIsSubmitted(false), 5000);
       } else {
@@ -143,6 +159,9 @@ export default function ContactForm() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="relative z-10 space-y-8">
+                {/* Honeypot Field */}
+                <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
                     <label className="text-sm font-semibold text-white/40 ml-1">Your Name</label>
