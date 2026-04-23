@@ -123,11 +123,7 @@ export default function HeroSection() {
           </button>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-white/20">
-          <span className="text-[10px] font-bold tracking-[0.4em] uppercase vertical-text">Scroll to Explore</span>
-          <ChevronDown className="w-4 h-4 animate-bounce" />
-        </div>
+
 
       </div>
 

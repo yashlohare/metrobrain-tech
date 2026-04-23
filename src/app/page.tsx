@@ -2,8 +2,9 @@ import AnimatedLayout from "@/components/AnimatedLayout";
 import HeroSection from "@/components/HeroSection";
 import ServicesGrid from "@/components/ServicesGrid";
 import TechStack from "@/components/TechStack";
-import PricingSection from "@/components/PricingSection";
 import ProjectsShowcase from "@/components/ProjectsShowcase";
+import TrustedBy from "@/components/TrustedBy";
+import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ProjectEstimator from "@/components/ProjectEstimator";
 import InsightsSection from "@/components/InsightsSection";
@@ -19,6 +20,7 @@ export default function Home() {
       <ServicesGrid />
       <TechStack />
       <ProjectsShowcase />
+      <TrustedBy />
       <PricingSection />
       <TestimonialsSection />
       <ProjectEstimator />
