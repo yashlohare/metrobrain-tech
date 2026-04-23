@@ -108,27 +108,20 @@ export default function TrustedBy() {
 
           <div className="relative w-full overflow-hidden mask-fade-edges py-8">
             <div className="marquee-inner flex gap-12 w-max items-center">
-              {displayPartners.map((partner, i) => {
-                const PartnerIcon = partner.icon;
-                return (
-                  <div key={i} className="flex flex-col items-center gap-6 group px-8">
-                    <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:bg-white/[0.08] group-hover:border-cyan-500/30 group-hover:scale-105 shadow-2xl">
-                      {partner.isLocal ? (
-                        <img 
-                          src={partner.logo} 
-                          alt={partner.name} 
-                          className="w-20 h-20 md:w-24 md:h-24 object-contain transition-all duration-500 drop-shadow-2xl group-hover:scale-110"
-                        />
-                      ) : (
-                        PartnerIcon && <PartnerIcon className="w-12 h-12 md:w-16 md:h-16 text-white/10 group-hover:text-cyan-400 transition-all duration-500" />
-                      )}
-                    </div>
-                    <span className="text-[10px] font-heading font-black text-white/10 uppercase tracking-[0.3em] group-hover:text-white transition-colors">
-                      {partner.name}
-                    </span>
+              {displayPartners.map((partner, i) => (
+                <div key={i} className="flex flex-col items-center gap-6 group px-8">
+                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center transition-all duration-500 group-hover:bg-white/[0.08] group-hover:border-cyan-500/30 group-hover:scale-105 shadow-2xl">
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.name} 
+                      className="w-20 h-20 md:w-24 md:h-24 object-contain transition-all duration-500 drop-shadow-2xl group-hover:scale-110"
+                    />
                   </div>
-                );
-              })}
+                  <span className="text-[10px] font-heading font-black text-white/10 uppercase tracking-[0.3em] group-hover:text-white transition-colors">
+                    {partner.name}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
