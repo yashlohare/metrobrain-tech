@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Link, Mail, Bot, Phone, ShieldCheck } from "lucide-react";
+import { Link as LinkIcon, Mail, Bot, Phone, ShieldCheck, Linkedin } from "lucide-react";
 
 export default function LeadershipSection() {
   return (
@@ -47,6 +47,9 @@ export default function LeadershipSection() {
               Visionary Technologist specializing in AI systems and enterprise architecture. Driving innovation that transforms complex business logic into high-fidelity digital ecosystems.
             </p>
             <div className="flex items-center gap-4 pt-8 border-t border-white/5">
+              <a href="https://www.linkedin.com/in/yash-lohare/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 text-slate-400 hover:bg-cyan-500 hover:text-white transition-all duration-300">
+                <Linkedin className="w-4 h-4" />
+              </a>
               <a href="tel:+917047123555" className="p-3 rounded-xl bg-white/5 text-slate-400 hover:bg-cyan-500 hover:text-white transition-all duration-300">
                 <Phone className="w-4 h-4" />
               </a>
@@ -106,6 +109,9 @@ export default function LeadershipSection() {
               Full-stack development expert focused on scaling high-performance digital infrastructure. Architecting resilient systems with surgical precision and security.
             </p>
             <div className="flex items-center gap-4 pt-8 border-t border-white/5">
+              <a href="https://www.linkedin.com/in/adinath-made/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 text-slate-400 hover:bg-cyan-500 hover:text-white transition-all duration-300">
+                <Linkedin className="w-4 h-4" />
+              </a>
               <a href="tel:+918805775486" className="p-3 rounded-xl bg-white/5 text-slate-400 hover:bg-cyan-500 hover:text-white transition-all duration-300">
                 <Phone className="w-4 h-4" />
               </a>
