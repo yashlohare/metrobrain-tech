@@ -48,12 +48,12 @@ export default function NeuralIntro() {
               className="absolute inset-0 bg-cyan-500 rounded-full blur-[80px]"
             />
             <motion.div
-              initial={{ rotate: 0 }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-              className="w-28 h-28 rounded-3xl border-2 border-cyan-500/20 flex items-center justify-center relative z-10 bg-slate-900/50 backdrop-blur-xl"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="w-28 h-28 rounded-3xl border-2 border-cyan-500/20 flex items-center justify-center relative z-10 bg-slate-900/50 backdrop-blur-xl overflow-hidden"
             >
-              <Cpu className="w-12 h-12 text-cyan-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]" />
+              <img src="/logo.png" alt="Metrobrain Logo" className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]" />
             </motion.div>
           </div>
 
