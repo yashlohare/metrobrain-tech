@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Send, Phone, Mail } from "lucide-react";
+import { X, Send, Phone, Mail, Cpu } from "lucide-react";
 
 const LinkedinIcon = ({ className }: { className?: string }) => (
   <svg 
@@ -70,6 +70,9 @@ export default function ContactModal() {
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
+        headers: {
+          "Accept": "application/json"
+        },
         body: formData
       });
 
@@ -81,10 +84,11 @@ export default function ContactModal() {
         e.currentTarget.reset();
         setSelectedType(null);
       } else {
-        alert("Something went wrong. Please try again.");
+        alert(data.message || "Something went wrong. Please try again.");
       }
-    } catch (error) {
-      alert("Network error. Please try again.");
+    } catch (error: any) {
+      console.error("Form submission error:", error);
+      alert("Network error: " + (error.message || "Please try again."));
     } finally {
       setIsSubmitting(false);
     }
@@ -121,22 +125,94 @@ export default function ContactModal() {
         </button>
 
         {isSyncing && (
-          <div className="absolute inset-0 z-20 bg-[#0A0A0F] flex flex-col items-center justify-center space-y-8 animate-in fade-in duration-500">
-            <div className="relative w-32 h-32">
-              <div className="absolute inset-0 border-2 border-cyan-500/20 rounded-full animate-[spin_3s_linear_infinite]" />
-              <div className="absolute inset-2 border border-violet-500/30 rounded-full animate-[spin_2s_linear_infinite_reverse]" />
+          <div className="absolute inset-0 z-30 bg-[#0A0A0F]/95 backdrop-blur-2xl flex flex-col items-center justify-center overflow-hidden animate-in fade-in duration-300">
+            {/* Background Grid & Scanline */}
+            <div className="absolute inset-0 opacity-20 bg-[linear-gradient(rgba(6,182,212,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.15)_1px,transparent_1px)] bg-[size:40px_40px]" />
+            <div className="absolute inset-0 h-[2px] bg-cyan-500/50 shadow-[0_0_20px_rgba(6,182,212,0.8)] animate-[scan_2s_ease-in-out_infinite]" />
+
+            {/* Central Holographic Core */}
+            <div className="relative flex items-center justify-center mb-12">
+              {/* Expanding Ripple Rings */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 bg-cyan-500/10 rounded-full flex items-center justify-center border border-cyan-500/20 shadow-[0_0_30px_rgba(34,211,238,0.2)]">
-                  <div className="w-2 h-2 bg-cyan-500 rounded-full animate-ping" />
+                {[1, 2, 3].map((i) => (
+                  <div 
+                    key={i} 
+                    className="absolute rounded-full border border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.1)] animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]"
+                    style={{ width: `${i * 100}px`, height: `${i * 100}px`, animationDelay: `${i * 0.3}s` }}
+                  />
+                ))}
+              </div>
+
+              {/* Orbital Rings */}
+              <div className="absolute w-48 h-48 border-y-2 border-transparent border-t-cyan-500/80 border-b-violet-500/80 rounded-full animate-[spin_3s_linear_infinite]" />
+              <div className="absolute w-40 h-40 border-x-2 border-transparent border-l-cyan-400 border-r-fuchsia-500 rounded-full animate-[spin_2s_linear_infinite_reverse]" />
+              
+              {/* Inner Core */}
+              <div className="relative w-24 h-24 bg-black/50 border-2 border-cyan-500/50 rounded-full backdrop-blur-md flex items-center justify-center shadow-[0_0_40px_rgba(6,182,212,0.4)]">
+                <div className="absolute inset-0 bg-cyan-500/20 rounded-full animate-pulse" />
+                <Cpu className="w-10 h-10 text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,1)] animate-[pulse_1s_ease-in-out_infinite]" />
+              </div>
+
+              {/* Orbital Nodes */}
+              <div className="absolute w-48 h-48 animate-[spin_4s_linear_infinite]">
+                <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(6,182,212,1)]" />
+                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-violet-400 rounded-full shadow-[0_0_10px_rgba(139,92,246,1)]" />
+              </div>
+            </div>
+
+            {/* Typography & Loading Bar */}
+            <div className="relative z-10 flex flex-col items-center space-y-6">
+              <div className="flex flex-col items-center gap-2">
+                <h4 className="text-xl md:text-2xl font-black font-heading tracking-[0.5em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-violet-500 animate-pulse">
+                  System Override
+                </h4>
+                <p className="text-cyan-500/60 text-xs font-bold tracking-[0.4em] uppercase flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-ping" />
+                  Establishing Neural Sync
+                </p>
+              </div>
+
+              {/* Futuristic Progress Bar */}
+              <div className="w-64 h-2 bg-white/5 border border-white/10 rounded-full overflow-hidden relative">
+                {/* Glitch Overlay */}
+                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-50" />
+                
+                <div className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-violet-500 w-full animate-[progress_1.5s_ease-out_forwards] relative shadow-[0_0_15px_rgba(6,182,212,0.8)]">
+                  <div className="absolute top-0 right-0 bottom-0 w-10 bg-white/40 blur-sm animate-[shimmer_1s_infinite]" />
                 </div>
               </div>
-            </div>
-            <div className="space-y-2 text-center">
-              <h4 className="text-sm font-bold tracking-[0.4em] uppercase text-cyan-400 animate-pulse">Establishing Neural Sync</h4>
-              <div className="w-48 h-1 bg-white/5 rounded-full overflow-hidden mx-auto">
-                <div className="h-full bg-gradient-to-r from-cyan-500 to-violet-500 animate-[shimmer_1.5s_infinite]" style={{ width: '60%' }} />
+
+              {/* Fake Data Stream Text */}
+              <div className="text-[8px] font-mono text-cyan-500/40 uppercase tracking-widest animate-pulse h-4 overflow-hidden text-center">
+                <p className="animate-[slideUp_1.5s_steps(4)_infinite]">
+                  Handshake protocol initiated...<br/>
+                  Bypassing security nodes...<br/>
+                  Injecting payload...<br/>
+                  Connection established.
+                </p>
               </div>
             </div>
+
+            {/* Custom CSS for this specific loader */}
+            <style dangerouslySetInnerHTML={{__html: `
+              @keyframes scan {
+                0% { top: -10%; opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { top: 110%; opacity: 0; }
+              }
+              @keyframes progress {
+                0% { width: 0%; }
+                20% { width: 15%; }
+                50% { width: 60%; }
+                80% { width: 85%; }
+                100% { width: 100%; }
+              }
+              @keyframes slideUp {
+                0% { transform: translateY(0); }
+                100% { transform: translateY(-400%); }
+              }
+            `}} />
           </div>
         )}
 
