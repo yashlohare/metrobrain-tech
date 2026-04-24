@@ -14,7 +14,6 @@ import Contact from './sections/Contact';
 import Founders from './sections/Founders';
 import Partners from './sections/Partners';
 import ChatWidget from './chat/ChatWidget';
-import AdminPanel from './admin/AdminPanel';
 import EcommercePrototype from './prototypes/EcommercePrototype';
 import FoodDeliveryPrototype from './prototypes/FoodDeliveryPrototype';
 import AIBotPrototype from './prototypes/AIBotPrototype';
@@ -49,7 +48,6 @@ function App() {
             </LogoTransition>
           } 
         />
-        <Route path="/admin/*" element={<AdminPanel />} />
         <Route path="/prototypes/ecommerce" element={<EcommercePrototype />} />
         <Route path="/prototypes/food-delivery" element={<FoodDeliveryPrototype />} />
         <Route path="/prototypes/ai-bot" element={<AIBotPrototype />} />

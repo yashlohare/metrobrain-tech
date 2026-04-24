@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { sendLeadNotification } from './notifications';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -33,6 +34,16 @@ export const submitContact = async (contactData) => {
       ]);
 
     if (error) throw error;
+    
+    // Trigger notification
+    await sendLeadNotification({
+      name: contactData.name,
+      phone: contactData.phone,
+      email: contactData.email,
+      service: contactData.service,
+      message: contactData.message,
+    });
+
     return { success: true, data };
   } catch (error) {
     console.error('Error submitting contact:', error);
