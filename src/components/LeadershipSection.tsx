@@ -1,7 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Link as LinkIcon, Mail, Bot, Phone, ShieldCheck, Linkedin } from "lucide-react";
+import { Link as LinkIcon, Mail, Bot, Phone, ShieldCheck } from "lucide-react";
+
+const LinkedinIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
 
 export default function LeadershipSection() {
   return (
@@ -48,7 +56,7 @@ export default function LeadershipSection() {
             </p>
             <div className="flex items-center gap-4 pt-8 border-t border-white/5">
               <a href="https://www.linkedin.com/in/yash-lohare/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 text-slate-400 hover:bg-cyan-500 hover:text-white transition-all duration-300">
-                <Linkedin className="w-4 h-4" />
+                <LinkedinIcon className="w-4 h-4" />
               </a>
               <a href="tel:+917047123555" className="p-3 rounded-xl bg-white/5 text-slate-400 hover:bg-cyan-500 hover:text-white transition-all duration-300">
                 <Phone className="w-4 h-4" />
@@ -110,7 +118,7 @@ export default function LeadershipSection() {
             </p>
             <div className="flex items-center gap-4 pt-8 border-t border-white/5">
               <a href="https://www.linkedin.com/in/adinath-made/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-xl bg-white/5 text-slate-400 hover:bg-cyan-500 hover:text-white transition-all duration-300">
-                <Linkedin className="w-4 h-4" />
+                <LinkedinIcon className="w-4 h-4" />
               </a>
               <a href="tel:+918805775486" className="p-3 rounded-xl bg-white/5 text-slate-400 hover:bg-cyan-500 hover:text-white transition-all duration-300">
                 <Phone className="w-4 h-4" />

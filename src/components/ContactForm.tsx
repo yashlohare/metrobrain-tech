@@ -53,6 +53,51 @@ export default function ContactForm() {
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
+
+    // Validation
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const subject = formData.get("subject") as string;
+    const message = formData.get("message") as string;
+
+    if (!name || name.trim().length < 3) {
+      alert("Please enter a valid name (at least 3 characters).");
+      setIsSubmitting(false);
+      return;
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email || !emailRegex.test(email.trim())) {
+      alert("Please enter a valid email address.");
+      setIsSubmitting(false);
+      return;
+    }
+    if (!subject || subject.trim().length < 3) {
+      alert("Please enter a valid subject (at least 3 characters).");
+      setIsSubmitting(false);
+      return;
+    }
+    if (!message || message.trim().length < 10) {
+      alert("Please enter a more detailed message (at least 10 characters).");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const verifyRes = await fetch('/api/verify-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() })
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyData.valid) {
+        alert(verifyData.message || "Please enter a valid email address.");
+        setIsSubmitting(false);
+        return;
+      }
+    } catch (err) {
+      console.warn("Email verification failed, proceeding anyway.");
+    }
+
     formData.append("access_key", "14e52cb4-8b56-4a19-a22e-c4e061afcd19");
 
     // Honeypot check

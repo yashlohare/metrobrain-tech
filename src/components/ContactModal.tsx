@@ -58,6 +58,52 @@ export default function ContactModal() {
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
+    
+    // Validation
+    const fullName = formData.get("full_name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const message = formData.get("message") as string;
+
+    if (!fullName || fullName.trim().length < 3) {
+      alert("Please enter a valid full name (at least 3 characters).");
+      setIsSubmitting(false);
+      return;
+    }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!email || !emailRegex.test(email.trim())) {
+      alert("Please enter a valid email address.");
+      setIsSubmitting(false);
+      return;
+    }
+    const phoneRegex = /^\+?[0-9\s\-]{10,15}$/;
+    if (!phone || !phoneRegex.test(phone.trim()) || phone.replace(/\D/g, '').length < 10) {
+      alert("Please enter a valid contact number (at least 10 digits).");
+      setIsSubmitting(false);
+      return;
+    }
+    if (!message || message.trim().length < 10) {
+      alert("Please enter a more detailed message (at least 10 characters).");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const verifyRes = await fetch('/api/verify-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email.trim() })
+      });
+      const verifyData = await verifyRes.json();
+      if (!verifyData.valid) {
+        alert(verifyData.message || "Please enter a valid email address.");
+        setIsSubmitting(false);
+        return;
+      }
+    } catch (err) {
+      console.warn("Email verification failed, proceeding anyway.");
+    }
+
     formData.append("access_key", "14e52cb4-8b56-4a19-a22e-c4e061afcd19");
 
     // Honeypot check
