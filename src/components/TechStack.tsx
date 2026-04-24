@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 
 const technologies = [
@@ -19,7 +18,6 @@ const technologies = [
 ];
 
 export default function TechStack() {
-  const [isPaused, setIsPaused] = useState(false);
   const duplicatedTech = [...technologies, ...technologies, ...technologies];
 
   return (
@@ -37,8 +35,6 @@ export default function TechStack() {
 
       <div 
         className="relative w-full flex overflow-hidden group cursor-pointer"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
       >
         {/* Left Gradient Mask */}
         <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
@@ -46,15 +42,7 @@ export default function TechStack() {
         {/* Right Gradient Mask */}
         <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
-        <motion.div
-          animate={{ x: isPaused ? undefined : ["0%", "-33.33%"] }}
-          transition={{
-            repeat: Infinity,
-            ease: "linear",
-            duration: 25,
-          }}
-          className="flex whitespace-nowrap items-center py-4"
-        >
+        <div className="flex whitespace-nowrap items-center py-4 tech-marquee">
           {duplicatedTech.map((tech, index) => (
             <motion.div
               key={index}
@@ -71,8 +59,21 @@ export default function TechStack() {
               </span>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
+      
+      <style jsx>{`
+        .tech-marquee {
+          animation: scroll-tech 25s linear infinite;
+        }
+        .group:hover .tech-marquee {
+          animation-play-state: paused;
+        }
+        @keyframes scroll-tech {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.33%); }
+        }
+      `}</style>
     </section>
   );
 }

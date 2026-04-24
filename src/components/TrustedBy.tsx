@@ -64,11 +64,11 @@ export default function TrustedBy() {
   const displayPartners = [...partners, ...partners];
 
   return (
-    <section ref={container} className="relative py-24 px-6 overflow-hidden">
+    <section ref={container} className="relative py-16 lg:py-24 px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Top Section: Trusted By & Stats */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16 lg:mb-32">
           <div className="space-y-8">
             <h2 className="text-6xl md:text-8xl font-heading font-bold text-white tracking-tighter uppercase">
               Trusted By
@@ -98,7 +98,7 @@ export default function TrustedBy() {
         </div>
 
         {/* Bottom Section: Global Partners Marquee */}
-        <div className="space-y-16">
+        <div className="space-y-8 lg:space-y-16">
           <div className="flex flex-col items-center">
             <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-12" />
             <h4 className="text-[10px] font-heading font-black text-cyan-500/60 uppercase tracking-[0.6em]">
@@ -117,7 +117,7 @@ export default function TrustedBy() {
                       className="w-20 h-20 md:w-24 md:h-24 object-contain transition-all duration-500 drop-shadow-2xl group-hover:scale-110"
                     />
                   </div>
-                  <span className="text-[10px] font-heading font-black text-white/10 uppercase tracking-[0.3em] group-hover:text-white transition-colors">
+                  <span className="text-[10px] font-heading font-black text-cyan-400/80 uppercase tracking-[0.3em] drop-shadow-[0_0_8px_rgba(34,211,238,0.4)] group-hover:text-cyan-300 group-hover:drop-shadow-[0_0_12px_rgba(34,211,238,0.8)] transition-all duration-300">
                     {partner.name}
                   </span>
                 </div>
