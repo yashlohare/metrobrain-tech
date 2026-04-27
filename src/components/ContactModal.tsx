@@ -392,13 +392,7 @@ export default function ContactModal() {
 
                 <div className="space-y-2">
                   <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 ml-1">Estimated Budget</label>
-                  <select required name="budget" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all appearance-none cursor-pointer">
-                    <option value="" disabled selected>Select a budget range</option>
-                    <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
-                    <option value="₹1,00,000 - ₹5,00,000">₹1,00,000 - ₹5,00,000</option>
-                    <option value="₹5,00,000 - ₹15,00,000">₹5,00,000 - ₹15,00,000</option>
-                    <option value="₹15,00,000+">₹15,00,000+</option>
-                  </select>
+                  <input required name="budget" type="text" placeholder="e.g. ₹5,00,000" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all" />
                 </div>
 
                 <div className="space-y-2 flex-1 flex flex-col">

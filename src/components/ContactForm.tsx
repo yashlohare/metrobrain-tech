@@ -243,13 +243,13 @@ export default function ContactForm() {
                   </div>
                   <div className="space-y-3">
                     <label className="text-sm font-semibold text-white/40 ml-1">Estimated Budget</label>
-                    <select required name="budget" className="w-full bg-transparent border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-cyan-500/50 transition-all appearance-none cursor-pointer">
-                      <option value="" disabled selected className="text-black">Select a budget range</option>
-                      <option value="₹50,000 - ₹1,00,000" className="text-black">₹50,000 - ₹1,00,000</option>
-                      <option value="₹1,00,000 - ₹5,00,000" className="text-black">₹1,00,000 - ₹5,00,000</option>
-                      <option value="₹5,00,000 - ₹15,00,000" className="text-black">₹5,00,000 - ₹15,00,000</option>
-                      <option value="₹15,00,000+" className="text-black">₹15,00,000+</option>
-                    </select>
+                    <input 
+                      required
+                      name="budget"
+                      type="text" 
+                      placeholder="e.g. ₹5,00,000" 
+                      className="w-full bg-transparent border border-white/10 rounded-2xl px-6 py-4 text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 transition-all"
+                    />
                   </div>
                 </div>
 
