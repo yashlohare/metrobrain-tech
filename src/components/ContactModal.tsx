@@ -42,6 +42,7 @@ export default function ContactModal() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
+  const [initialMessage, setInitialMessage] = useState("");
   const { playSuccess } = useUIInteraction();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -144,7 +145,20 @@ export default function ContactModal() {
   };
 
   useEffect(() => {
-    const handleOpen = () => {
+    const handleOpen = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      let msg = "";
+      if (customEvent.detail) {
+        const { projectType, timeline, features } = customEvent.detail;
+        if (projectType) setSelectedType(projectType);
+        msg = "Hi Metrobrain team,\n\nI used your project estimator and I'd like to discuss my project.\n\n";
+        if (projectType) msg += `Platform Type: ${projectType}\n`;
+        if (timeline) msg += `Timeline: ${timeline}\n`;
+        if (features && features.length > 0) msg += `Features: ${features.join(", ")}\n`;
+        msg += "\nAdditional details: ";
+      }
+      setInitialMessage(msg);
+      
       setIsSubmitted(false);
       setIsOpen(true);
       setIsSyncing(true);
@@ -376,9 +390,20 @@ export default function ContactModal() {
                   </div>
                 </div>
 
+                <div className="space-y-2">
+                  <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 ml-1">Estimated Budget</label>
+                  <select required name="budget" className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all appearance-none cursor-pointer">
+                    <option value="" disabled selected>Select a budget range</option>
+                    <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
+                    <option value="₹1,00,000 - ₹5,00,000">₹1,00,000 - ₹5,00,000</option>
+                    <option value="₹5,00,000 - ₹15,00,000">₹5,00,000 - ₹15,00,000</option>
+                    <option value="₹15,00,000+">₹15,00,000+</option>
+                  </select>
+                </div>
+
                 <div className="space-y-2 flex-1 flex flex-col">
                   <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 ml-1">Message</label>
-                  <textarea required name="message" placeholder="Describe your project vision..." className="w-full flex-1 min-h-[120px] bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all resize-none" />
+                  <textarea required name="message" defaultValue={initialMessage} placeholder="Describe your project vision..." className="w-full flex-1 min-h-[120px] bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-sm text-white placeholder:text-white/20 focus:outline-none focus:border-cyan-500/50 focus:bg-black/60 transition-all resize-none" />
                 </div>
 
                 <button 

@@ -3,8 +3,9 @@ import HeroSection from "@/components/HeroSection";
 import ServicesGrid from "@/components/ServicesGrid";
 import TechStack from "@/components/TechStack";
 import ProjectsShowcase from "@/components/ProjectsShowcase";
+import EngagementModels from "@/components/EngagementModels";
+import ProcessTimeline from "@/components/ProcessTimeline";
 import TrustedBy from "@/components/TrustedBy";
-import PricingSection from "@/components/PricingSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ProjectEstimator from "@/components/ProjectEstimator";
 import InsightsSection from "@/components/InsightsSection";
@@ -20,8 +21,9 @@ export default function Home() {
       <ServicesGrid />
       <TechStack />
       <ProjectsShowcase />
+      <EngagementModels />
+      <ProcessTimeline />
       <TrustedBy />
-      <PricingSection />
       <TestimonialsSection />
       <ProjectEstimator />
       <InsightsSection />

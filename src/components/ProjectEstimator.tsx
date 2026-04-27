@@ -138,7 +138,14 @@ export default function ProjectEstimator() {
 
                 {/* Action */}
                 <button 
-                  onClick={() => window.dispatchEvent(new CustomEvent('open-contact'))}
+                  onClick={() => {
+                    const detail = {
+                      projectType,
+                      timeline,
+                      features
+                    };
+                    window.dispatchEvent(new CustomEvent('open-contact', { detail }));
+                  }}
                   className="w-full py-5 rounded-xl bg-white text-black font-bold uppercase tracking-[0.2em] text-xs flex items-center justify-center gap-3 hover:bg-cyan-400 transition-colors shadow-xl"
                 >
                   Discuss Full Scope
