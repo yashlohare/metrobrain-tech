@@ -47,6 +47,7 @@ export default function ContactModal() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
 
     // Client-side Rate Limiting (60s Cooldown)
     const lastSub = localStorage.getItem("last_submission_modal");
@@ -58,7 +59,7 @@ export default function ContactModal() {
 
     setIsSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
     
     // Validation
     const fullName = formData.get("full_name") as string;
@@ -131,7 +132,7 @@ export default function ContactModal() {
         setIsSubmitted(true);
         playSuccess();
         localStorage.setItem("last_submission_modal", Date.now().toString());
-        e.currentTarget.reset();
+        form.reset();
         setSelectedType(null);
       } else {
         alert(data.message || "Something went wrong. Please try again.");
@@ -279,7 +280,8 @@ export default function ContactModal() {
           </div>
         )}
 
-        <div className="flex flex-col md:flex-row relative z-10 h-full max-h-[85vh] overflow-y-auto custom-scrollbar">
+        <div className="relative z-10 w-full max-h-[85vh] overflow-y-auto custom-scrollbar">
+          <div className="flex flex-col md:flex-row min-h-full">
           
           {/* Left Info Panel */}
           <div className="w-full md:w-2/5 p-8 md:p-12 bg-white/[0.02] border-b md:border-b-0 md:border-r border-white/5 flex flex-col justify-between">
@@ -419,6 +421,7 @@ export default function ContactModal() {
                 </button>
               </form>
             )}
+          </div>
           </div>
         </div>
       </div>

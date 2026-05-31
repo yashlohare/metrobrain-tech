@@ -41,6 +41,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
 
     // Client-side Rate Limiting (60s Cooldown)
     const lastSub = localStorage.getItem("last_submission");
@@ -52,7 +53,7 @@ export default function ContactForm() {
 
     setIsSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
+    const formData = new FormData(form);
 
     // Validation
     const name = formData.get("name") as string;
@@ -117,7 +118,7 @@ export default function ContactForm() {
       if (data.success) {
         setIsSubmitted(true);
         localStorage.setItem("last_submission", Date.now().toString());
-        e.currentTarget.reset();
+        form.reset();
         setTimeout(() => setIsSubmitted(false), 5000);
       } else {
         alert("Something went wrong. Please try again or contact us directly via email.");
